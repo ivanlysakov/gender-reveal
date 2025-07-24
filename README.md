@@ -1,36 +1,171 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👶 Olha & Ivan's Gender Reveal Website
 
-## Getting Started
+A beautiful, interactive gender reveal website built with Next.js, Tailwind CSS, and Convex. This website allows friends and family to participate in the excitement of Olha and Ivan's gender reveal celebration, even from afar.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Countdown Timer** - Building excitement for the big reveal
+- **Interactive Guessing Game** - Friends can vote on whether it's a boy or girl
+- **RSVP System** - Guest attendance confirmation with real-time stats
+- **Photo Gallery** - Pregnancy journey and ultrasound photos
+- **Reveal Section** - For the big moment with animated celebration
+- **Personal Message** - Heartfelt message from Olha and Ivan
+- **Responsive Design** - Beautiful on all devices
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: Convex (real-time database)
+- **Deployment**: Vercel
+- **Images**: Next.js Image Optimization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+
+- npm or yarn
+- Convex account
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository
+   \`\`\`bash
+   git clone <repository-url>
+   cd gender-reveal-site
+   \`\`\`
 
-## Deploy on Vercel
+2. Install dependencies
+   \`\`\`bash
+   npm install
+   \`\`\`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Set up Convex
+   \`\`\`bash
+   npx convex dev
+   \`\`\`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Start the development server
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 📁 Project Structure
+
+\`\`\`
+gender-reveal-site/
+├── src/
+│ ├── app/
+│ │ ├── page.tsx # Main homepage
+│ │ ├── layout.tsx # Root layout
+│ │ └── globals.css # Global styles
+│ └── components/
+│ ├── CountdownTimer.tsx # Countdown to reveal
+│ ├── GuessingGame.tsx # Gender prediction game
+│ ├── RSVPSection.tsx # RSVP management
+│ ├── PhotoGallery.tsx # Photo gallery
+│ └── RevealSection.tsx # The big reveal
+├── convex/
+│ ├── schema.ts # Database schema
+│ ├── party.ts # Party management functions
+│ ├── guesses.ts # Guessing game functions
+│ └── rsvp.ts # RSVP functions
+├── public/ # Static assets
+└── package.json
+\`\`\`
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a \`.env.local\` file in the root directory:
+
+\`\`\`
+CONVEX_DEPLOYMENT=your-convex-deployment-url
+NEXT_PUBLIC_CONVEX_URL=your-convex-public-url
+\`\`\`
+
+### Customizing the Website
+
+1. **Party Details**: Update the date, time, and location in the components
+2. **Photos**: Replace the mock photos with your actual pregnancy photos
+3. **Colors**: Modify the Tailwind classes to match your preferred color scheme
+4. **Content**: Update the personal message and any text content
+
+## 🚀 Deployment
+
+### Deploy to Vercel
+
+1. Connect your GitHub repository to Vercel
+2. Set up your environment variables in Vercel dashboard
+3. Deploy automatically on every push to main branch
+
+### Manual Deployment
+
+\`\`\`bash
+npm run build
+npm run start
+\`\`\`
+
+## 📱 Features in Detail
+
+### Guessing Game
+
+- Real-time voting statistics
+- Interactive boy/girl selection
+- Personal messages from guests
+- Live results dashboard
+
+### RSVP System
+
+- Email validation
+- Attendance tracking
+- Guest message collection
+- Real-time attendance stats
+
+### Photo Gallery
+
+- Category filtering (Pregnancy, Ultrasounds, General)
+- Modal view for full-size images
+- Responsive grid layout
+- Smooth animations
+
+### Countdown Timer
+
+- Real-time countdown to reveal
+- Beautiful animated display
+- Mobile-responsive design
+- Customizable target date
+
+## 🎨 Design Features
+
+- **Gradient Backgrounds**: Beautiful pink/blue gradients
+- **Glass Morphism**: Modern backdrop-blur effects
+- **Smooth Animations**: Hover effects and transitions
+- **Mobile-First**: Responsive design for all devices
+- **Accessibility**: Proper ARIA labels and keyboard navigation
+
+## 📊 Database Schema
+
+The Convex database includes:
+
+- **Party**: Event details and settings
+- **RSVPs**: Guest attendance responses
+- **Guesses**: Gender predictions from guests
+- **Photos**: Gallery images with categories
+- **Wishes**: Congratulatory messages
+
+## 🎉 Special Thanks
+
+Built with love for Olha and Ivan's special moment. This website brings together friends and family from around the world to celebrate their exciting journey into parenthood.
+
+## 📞 Support
+
+For any questions or issues, feel free to reach out to the development team.
+
+---
+
+**Made with 💕 for Olha & Ivan's Baby Reveal**
