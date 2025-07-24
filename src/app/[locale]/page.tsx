@@ -1,79 +1,116 @@
 "use client";
 
 import CountdownTimer from "@/components/CountdownTimer";
+import DuckMascot from "@/components/DuckMascot";
+import FloatingBubbles from "@/components/FloatingBubbles";
 import GuessingGame from "@/components/GuessingGame";
+import LiquidButton from "@/components/LiquidButton";
 import PhotoGallery from "@/components/PhotoGallery";
 import RevealSection from "@/components/RevealSection";
+import RubberDuckyPattern from "@/components/RubberDuckyPattern";
 import RSVPSection from "@/components/RSVPSection";
+import ZodiacPrediction from "@/components/ZodiacPrediction";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
+import "@/styles/backgrounds.css";
+import "@/styles/liquid-design.css";
 
 export default function Home() {
   const t = useTranslations();
+  const [duckClicks, setDuckClicks] = useState(0);
+  const [showDuckDance, setShowDuckDance] = useState(false);
+
+  useEffect(() => {
+    if (duckClicks >= 5) {
+      setShowDuckDance(true);
+      setTimeout(() => {
+        setShowDuckDance(false);
+        setDuckClicks(0);
+      }, 3000);
+    }
+  }, [duckClicks]);
+
+  const handleDuckClick = () => {
+    setDuckClicks(prev => prev + 1);
+  };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-sky-50 via-purple-50 to-indigo-50 relative overflow-hidden">
-      {/* Animated Background Elements */}
+    <main className="min-h-screen bg-gradient-to-br from-[#F5FFF2] via-[#CFF5C4] to-[#B2E7A3] relative overflow-hidden rubber-ducky-bg">
+      {/* Animated Background Elements - Water Ripples */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-pink-300/20 to-blue-300/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-60 right-20 w-80 h-80 bg-gradient-to-r from-purple-300/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-300/20 to-indigo-300/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-[#A0D6D0]/20 to-[#B2E7A3]/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-60 right-20 w-80 h-80 bg-gradient-to-r from-[#CFF5C4]/20 to-[#FEEA70]/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/3 w-96 h-96 bg-gradient-to-r from-[#B2E7A3]/20 to-[#A0D6D0]/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
 
-        {/* Floating Elements */}
-        <div className="absolute top-32 right-1/4 text-pink-300/30 text-6xl animate-bounce delay-300">
-          🎈
+        {/* Floating Duck Elements */}
+        <div className="absolute top-32 right-1/4 opacity-30">
+          <DuckMascot variant="floating" size={80} />
         </div>
-        <div className="absolute top-80 left-1/4 text-blue-300/30 text-5xl animate-bounce delay-700">
-          ✨
+        <div className="absolute top-80 left-1/4 text-[#FEEA70]/40 text-5xl animate-bounce delay-700">
+          🌻
         </div>
-        <div className="absolute bottom-40 right-1/3 text-purple-300/30 text-4xl animate-bounce delay-1100">
-          🎀
+        <div className="absolute bottom-40 right-1/3 text-[#A0D6D0]/40 text-4xl animate-bounce delay-1100">
+          💧
         </div>
-        <div className="absolute top-1/2 left-20 text-rose-300/30 text-7xl animate-bounce delay-1500">
-          💕
+        <div className="absolute top-1/2 left-20 opacity-20">
+          <DuckMascot variant="swimming" size={100} />
         </div>
       </div>
 
       {/* Hero Section */}
       <section className="relative py-24 px-4 text-center">
+        <FloatingBubbles />
         <div className="max-w-5xl mx-auto relative">
-          {/* Main Title with Enhanced Styling */}
+          {/* Main Title with Duck Theme */}
           <div className="mb-12 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-3xl blur-3xl opacity-20 scale-110"></div>
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-              <h1 className="text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-br from-pink-500 via-purple-600 via-rose-500 to-blue-600 bg-clip-text text-transparent mb-6 leading-tight">
+            <div className="glass-hero will-blur">
+              <div className="flex justify-center mb-6">
+                <div className="relative liquid-float">
+                  <DuckMascot 
+                    variant={showDuckDance ? "dancing" : "floating"} 
+                    size={150} 
+                    onClick={handleDuckClick}
+                  />
+                  {duckClicks > 0 && duckClicks < 5 && (
+                    <div className="absolute -top-4 -right-4 bg-[#FEEA70] text-[#2E4A3B] rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                      {duckClicks}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-br from-[#2E4A3B] via-[#5A8650] to-[#7FB069] bg-clip-text text-transparent mb-6 leading-tight text-center">
                 {t("hero.title")}
               </h1>
               <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-pink-400 rounded-full"></div>
-                <p className="text-2xl md:text-3xl font-light text-gray-700 tracking-wide">
+                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent to-[#B2E7A3] rounded-full"></div>
+                <p className="text-xl md:text-2xl font-light text-[#2E4A3B] tracking-wide text-center">
                   {t("hero.subtitle")}
                 </p>
-                <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-blue-400 rounded-full"></div>
+                <div className="w-16 h-0.5 bg-gradient-to-l from-transparent to-[#B2E7A3] rounded-full"></div>
               </div>
               <div className="flex justify-center gap-2 mb-8">
-                <div className="w-3 h-3 bg-pink-400 rounded-full animate-pulse"></div>
-                <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-200"></div>
-                <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse delay-400"></div>
+                <div className="w-3 h-3 bg-[#FEEA70] rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-[#B2E7A3] rounded-full animate-pulse delay-200"></div>
+                <div className="w-3 h-3 bg-[#A0D6D0] rounded-full animate-pulse delay-400"></div>
               </div>
             </div>
           </div>
 
           {/* Enhanced Personal Message */}
           <div className="mb-16 relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-rose-400/20 via-pink-400/20 to-purple-400/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div className="relative bg-white/70 backdrop-blur-xl rounded-3xl p-10 md:p-12 shadow-2xl border border-white/30 max-w-4xl mx-auto transform hover:scale-[1.02] transition-all duration-500">
-              <div className="absolute top-6 left-6 text-4xl">💌</div>
-              <div className="absolute top-6 right-6 text-4xl">✨</div>
+            <div className="glass-panel glass-card-hover max-w-4xl mx-auto will-blur">
+              <div className="absolute top-6 left-6 text-4xl">🦆</div>
+              <div className="absolute top-6 right-6 text-4xl">🌿</div>
 
-              <div className="text-gray-800 text-lg md:text-xl leading-relaxed space-y-6 pt-4">
-                <p className="text-2xl font-semibold text-gray-800 mb-6">
+              <div className="text-[#2E4A3B] text-lg md:text-xl leading-relaxed space-y-6 pt-4">
+                <p className="text-2xl font-semibold text-[#2E4A3B] mb-6">
                   {t("hero.greeting")}
                 </p>
                 <p className="text-xl leading-relaxed">{t("hero.message1")}</p>
                 <p className="text-xl leading-relaxed">{t("hero.message2")}</p>
                 <p className="text-xl leading-relaxed">{t("hero.message3")}</p>
-                <div className="pt-6 border-t border-gray-200">
-                  <p className="text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <div className="pt-6 border-t border-[#B2E7A3]/30">
+                  <p className="text-xl font-bold bg-gradient-to-r from-[#5A8650] to-[#7FB069] bg-clip-text text-transparent">
                     {t("hero.signature")}
                     <br />
                     {t("hero.names")}
@@ -83,23 +120,45 @@ export default function Home() {
             </div>
           </div>
 
+          {/* CTA Button */}
+          <div className="text-center mb-16">
+            <LiquidButton
+              onClick={() => document.getElementById('reveal-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-xl font-bold px-12 py-5"
+            >
+              <span className="flex items-center gap-3">
+                <span className="text-3xl">🎉</span>
+                {t("hero.ctaButton")}
+                <span className="text-3xl">✨</span>
+              </span>
+            </LiquidButton>
+          </div>
+
           {/* Enhanced Countdown Timer */}
-          <div className="relative">
+          <div className="relative glass-card will-blur">
             <CountdownTimer />
           </div>
         </div>
       </section>
 
+      {/* Zodiac Prediction Section */}
+      <section className="relative py-20 px-4 bubble-pattern">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#B2E7A3]/30 to-[#A0D6D0]/30 backdrop-blur-sm"></div>
+        <div className="max-w-7xl mx-auto relative">
+          <ZodiacPrediction />
+        </div>
+      </section>
+
       {/* Guessing Game Section */}
       <section className="relative py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-50/50 to-blue-50/50 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#CFF5C4]/30 to-[#B2E7A3]/30 backdrop-blur-sm"></div>
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#5A8650] via-[#7FB069] to-[#B2E7A3] bg-clip-text text-transparent mb-4">
               {t("guessing.sectionTitle")}
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-pink-400 to-blue-400 mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            <div className="w-32 h-1 bg-gradient-to-r from-[#B2E7A3] to-[#A0D6D0] mx-auto rounded-full mb-6"></div>
+            <p className="text-xl text-[#2E4A3B] max-w-2xl mx-auto">
               {t("guessing.sectionSubtitle")}
             </p>
           </div>
@@ -108,8 +167,9 @@ export default function Home() {
       </section>
 
       {/* RSVP Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-20 px-4 water-wave-pattern">
         <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+        <div className="water-splash"></div>
         <div className="max-w-6xl mx-auto relative">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent mb-4">
@@ -126,7 +186,8 @@ export default function Home() {
 
       {/* Photo Gallery */}
       <section className="relative py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 to-pink-50/50 backdrop-blur-sm"></div>
+        <RubberDuckyPattern density="low" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#B2E7A3]/20 to-[#CFF5C4]/20 backdrop-blur-sm"></div>
         <div className="max-w-7xl mx-auto relative">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent mb-4">
@@ -142,14 +203,14 @@ export default function Home() {
       </section>
 
       {/* Reveal Section */}
-      <section className="relative py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-50/50 to-orange-50/50 backdrop-blur-sm"></div>
+      <section id="reveal-section" className="relative py-20 px-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FEEA70]/30 to-[#FFCC00]/30 backdrop-blur-sm"></div>
         <div className="max-w-5xl mx-auto relative">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#FFCC00] via-[#FEEA70] to-[#FFB700] bg-clip-text text-transparent mb-4">
               {t("reveal.sectionTitle")}
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-red-400 mx-auto rounded-full mb-6"></div>
+            <div className="w-32 h-1 bg-gradient-to-r from-[#FEEA70] to-[#FFCC00] mx-auto rounded-full mb-6"></div>
             <p className="text-xl text-gray-700 max-w-2xl mx-auto">
               {t("reveal.sectionSubtitle")}
             </p>

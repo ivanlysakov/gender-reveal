@@ -133,7 +133,7 @@ export default function RSVPSection() {
                       onChange={(e) =>
                         handleInputChange("name", e.target.value)
                       }
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm"
+                      className="glass-input w-full text-lg"
                       placeholder="Enter your full name"
                       required
                     />
@@ -158,7 +158,7 @@ export default function RSVPSection() {
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm"
+                      className="glass-input w-full text-lg"
                       placeholder="your.email@example.com"
                       required
                     />

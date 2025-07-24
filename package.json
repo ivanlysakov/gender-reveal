@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "convex": "^1.25.4",
+    "framer-motion": "^11.18.2",
     "next": "15.4.3",
     "next-intl": "^4.3.4",
     "react": "19.1.0",

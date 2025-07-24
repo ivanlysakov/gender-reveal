@@ -1,0 +1,172 @@
+/* Rubber Ducky Background Patterns */
+
+.bubble-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(160, 214, 208, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(178, 231, 163, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(254, 234, 112, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(160, 214, 208, 0.2) 0%, transparent 50%);
+  background-size: 200px 200px, 150px 150px, 180px 180px, 120px 120px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+.water-wave-pattern {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      rgba(160, 214, 208, 0.1) 35px,
+      rgba(160, 214, 208, 0.1) 70px
+    );
+}
+
+.rubber-ducky-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.rubber-ducky-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 204, 0, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 85% 85%, rgba(255, 204, 0, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 85% 15%, rgba(160, 214, 208, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 15% 85%, rgba(178, 231, 163, 0.1) 0%, transparent 25%);
+  background-size: 300px 300px;
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.floating-bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 70%);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: rise 15s infinite ease-in-out;
+}
+
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+  width: 60px;
+  height: 60px;
+  left: 30%;
+  animation-duration: 18s;
+  animation-delay: 2s;
+}
+
+.bubble:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  animation-duration: 14s;
+  animation-delay: 4s;
+}
+
+.bubble:nth-child(4) {
+  width: 50px;
+  height: 50px;
+  left: 70%;
+  animation-duration: 16s;
+  animation-delay: 1s;
+}
+
+.bubble:nth-child(5) {
+  width: 35px;
+  height: 35px;
+  left: 90%;
+  animation-duration: 20s;
+  animation-delay: 3s;
+}
+
+@keyframes rise {
+  0% {
+    bottom: -100px;
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-20px);
+  }
+  20% {
+    transform: translateX(20px);
+  }
+  30% {
+    transform: translateX(-20px);
+  }
+  40% {
+    transform: translateX(15px);
+  }
+  50% {
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  70% {
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+  100% {
+    bottom: 100%;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-1deg);
+  }
+}
+
+/* Water splash effect */
+.water-splash {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23A0D6D0' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 200% 100%;
+  animation: waves 10s linear infinite;
+}
+
+@keyframes waves {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 200%;
+  }
+}

@@ -5,14 +5,15 @@
     "keywords": "gender reveal, baby announcement, Olha Ivan, pregnancy celebration"
   },
   "hero": {
-    "title": "Baby Reveal",
-    "subtitle": "Olha & Ivan",
+    "title": "It's Almost Time to Quack the News!",
+    "subtitle": "Olha & Ivan's Little Duckling",
     "greeting": "Dear friends and family,",
-    "message1": "We're excited to share some wonderful news — we (Olha and Ivan) are expecting our first child!",
-    "message2": "Although we'll be holding a small gender reveal celebration with close family, we want to make sure that those of you who are far away can still be part of this special moment.",
-    "message3": "So we've prepared a little game to include everyone in the fun — stay tuned and join us in guessing whether it's a boy or a girl!",
-    "signature": "With all our love,",
-    "names": "Olha & Ivan 💕"
+    "message1": "Our pond is about to get a little bigger! We're thrilled to announce that our little duckling is on the way!",
+    "message2": "While we'll be celebrating with close family, we wanted to create this special digital pond where all our loved ones can gather, no matter how far away.",
+    "message3": "Join our waddle of excitement! Make your guess, discover their zodiac sign, and help us celebrate this amazing journey!",
+    "signature": "With love and quacks,",
+    "names": "Olha & Ivan 🦆",
+    "ctaButton": "Reveal the Surprise!"
   },
   "countdown": {
     "title": "Countdown to the Big Reveal!",
@@ -122,5 +123,14 @@
     "switcher": "Language",
     "english": "English",
     "ukrainian": "Українська"
+  },
+  "zodiac": {
+    "title": "Little Duckling's Zodiac Sign",
+    "subtitle": "Discover what the stars have in store for your baby!",
+    "enterDueDate": "Enter your due date",
+    "predictButton": "Reveal Zodiac Sign",
+    "yourBabyWillBe": "Your little duckling might be a {sign}!",
+    "personalityTraits": "Get ready for a personality that's",
+    "tryAgain": "Try Another Date"
   }
 }

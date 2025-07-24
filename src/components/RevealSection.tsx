@@ -297,9 +297,10 @@ export default function RevealSection() {
                   {t("thankYouAll")}
                 </p>
                 <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8">
-                  {t("canShareJoyWith")
-                    .replace("{gender}", actualGender === "boy" ? tGuessing("boy").toLowerCase() : tGuessing("girl").toLowerCase())
-                    .replace("{pronoun}", actualGender === "boy" ? t("heArrives") : t("sheArrives"))}
+                  {t("canShareJoyWith", {
+                    gender: actualGender === "boy" ? tGuessing("boy").toLowerCase() : tGuessing("girl").toLowerCase(),
+                    pronoun: actualGender === "boy" ? t("heArrives") : t("sheArrives")
+                  })}
                 </p>
 
                 <div className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-8 mb-8 border border-gray-200">
