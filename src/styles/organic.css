@@ -1,0 +1,238 @@
+/* Organic & Natural Design System */
+
+/* Organic Color Palette */
+:root {
+  /* Earth tones */
+  --organic-sage: #87A96B;
+  --organic-moss: #8A9A5B;
+  --organic-olive: #6B8E23;
+  --organic-fern: #4F7942;
+  
+  /* Soft naturals */
+  --organic-sand: #F5E6D3;
+  --organic-cream: #FFF8E7;
+  --organic-linen: #FAF0E6;
+  --organic-wheat: #F5DEB3;
+  
+  /* Accent colors from nature */
+  --organic-rose: #E8B4B8;
+  --organic-lavender: #B8A9C9;
+  --organic-sky: #B6D7E4;
+  --organic-peach: #FFDAB9;
+  
+  /* Neutral earth */
+  --organic-stone: #8B8680;
+  --organic-bark: #654321;
+  --organic-charcoal: #36454F;
+  --organic-clay: #B7845A;
+}
+
+/* Organic shapes and utilities */
+.organic-shape {
+  border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+}
+
+.organic-shape-alt {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.organic-blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+/* Organic gradients */
+.organic-gradient-soft {
+  background: linear-gradient(135deg, var(--organic-cream) 0%, var(--organic-sand) 50%, var(--organic-linen) 100%);
+}
+
+.organic-gradient-earth {
+  background: linear-gradient(135deg, var(--organic-sage) 0%, var(--organic-moss) 50%, var(--organic-olive) 100%);
+}
+
+.organic-gradient-sunset {
+  background: linear-gradient(135deg, var(--organic-peach) 0%, var(--organic-rose) 50%, var(--organic-lavender) 100%);
+}
+
+/* Organic card styles */
+.organic-card {
+  background: var(--organic-cream);
+  border: 2px solid var(--organic-sand);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.organic-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--organic-sand) 0%, transparent 70%);
+  opacity: 0.3;
+  animation: organic-float 20s ease-in-out infinite;
+}
+
+.organic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Organic button styles */
+.organic-button {
+  background: var(--organic-sage);
+  color: var(--organic-cream);
+  border: none;
+  padding: 16px 32px;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(135, 169, 107, 0.3);
+}
+
+.organic-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--organic-moss) 0%, transparent 70%);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%);
+}
+
+.organic-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.organic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(135, 169, 107, 0.4);
+}
+
+/* Organic input styles */
+.organic-input {
+  background: var(--organic-linen);
+  border: 2px solid var(--organic-sand);
+  color: var(--organic-charcoal);
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.organic-input:focus {
+  border-color: var(--organic-sage);
+  background: var(--organic-cream);
+  box-shadow: 0 0 0 4px rgba(135, 169, 107, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.organic-input::placeholder {
+  color: var(--organic-stone);
+  opacity: 0.7;
+}
+
+/* Organic text styles */
+.organic-heading {
+  color: var(--organic-charcoal);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.organic-text {
+  color: var(--organic-bark);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Botanical decorations */
+.botanical-decoration {
+  position: absolute;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.leaf-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 Q30 30 30 50 T50 90 Q70 70 70 50 T50 10' fill='%2387A96B' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  background-repeat: repeat;
+}
+
+/* Animations */
+@keyframes organic-float {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  33% {
+    transform: rotate(120deg) scale(1.1);
+  }
+  66% {
+    transform: rotate(240deg) scale(0.9);
+  }
+}
+
+@keyframes organic-sway {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-10px) rotate(-2deg);
+  }
+  75% {
+    transform: translateX(10px) rotate(2deg);
+  }
+}
+
+/* Natural textures */
+.texture-paper {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(245, 230, 211, 0.1) 10px,
+      rgba(245, 230, 211, 0.1) 20px
+    );
+}
+
+.texture-linen {
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(245, 230, 211, 0.03) 2px,
+      rgba(245, 230, 211, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(245, 230, 211, 0.03) 2px,
+      rgba(245, 230, 211, 0.03) 4px
+    );
+}
+
+/* Organic transitions */
+.organic-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive organic shapes */
+@media (max-width: 768px) {
+  .organic-shape,
+  .organic-shape-alt,
+  .organic-blob {
+    border-radius: 24px;
+  }
+}

@@ -21,12 +21,12 @@ export default function GuessingGame() {
     total: 20,
     recentGuesses: [
       {
-        name: "Sarah",
+        name: t("mockGuess1Name"),
         guess: "girl" as const,
-        message: "I have a feeling it&apos;s a girl!",
+        message: t("mockGuess1Message"),
       },
-      { name: "Mike", guess: "boy" as const, message: "Definitely a boy!" },
-      { name: "Emma", guess: "girl" as const, message: "Girl power!" },
+      { name: t("mockGuess2Name"), guess: "boy" as const, message: t("mockGuess2Message") },
+      { name: t("mockGuess3Name"), guess: "girl" as const, message: t("mockGuess3Message") },
     ],
   });
 

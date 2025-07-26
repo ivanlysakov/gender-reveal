@@ -48,7 +48,13 @@
     "teamBoySubtitle": "Little Princes",
     "teamGirlSubtitle": "Little Princesses",
     "totalPredictions": "Total Predictions",
-    "recentGuesses": "Recent Guesses"
+    "recentGuesses": "Recent Guesses",
+    "mockGuess1Name": "Sarah",
+    "mockGuess1Message": "I have a feeling it's a girl!",
+    "mockGuess2Name": "Mike",
+    "mockGuess2Message": "Definitely a boy!",
+    "mockGuess3Name": "Emma",
+    "mockGuess3Message": "Girl power!"
   },
   "rsvp": {
     "sectionTitle": "Join the Celebration",
@@ -84,7 +90,10 @@
     "photo3Caption": "Baby bump at 20 weeks! 🤰",
     "photo3DCaption": "3D ultrasound - so precious! 💕",
     "photo4Caption": "Getting ready for baby! 🍼",
-    "photo5Caption": "Maternity photoshoot ✨"
+    "photo5Caption": "Maternity photoshoot ✨",
+    "galleryPhoto": "Gallery photo",
+    "noPhotosYet": "No photos yet",
+    "checkBackSoon": "Check back soon for more beautiful memories!"
   },
   "reveal": {
     "sectionTitle": "The Big Moment",
@@ -113,7 +122,15 @@
     "heArrives": "he",
     "sheArrives": "she",
     "boy": "boy",
-    "girl": "girl"
+    "girl": "girl",
+    "drumRoll": "Drum roll please...",
+    "itsOfficial": "It's Official!",
+    "teamBoy": "Team Boy",
+    "teamGirl": "Team Girl",
+    "predictions": "predictions",
+    "winners": "WINNERS!",
+    "congratsToWinners": "Congratulations to everyone who guessed correctly!",
+    "thankYou": "Thank You!"
   },
   "footer": {
     "madeWith": "Made with love for our little miracle",
@@ -131,6 +148,72 @@
     "predictButton": "Reveal Zodiac Sign",
     "yourBabyWillBe": "Your little duckling might be a {sign}!",
     "personalityTraits": "Get ready for a personality that's",
-    "tryAgain": "Try Another Date"
+    "tryAgain": "Try Another Date",
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "prediction": {
+    "title": "Make Your Prediction",
+    "subtitle": "Follow the magical steps to discover what the future holds!",
+    "welcome": {
+      "title": "Welcome to the Prediction Portal",
+      "description": "Let's combine the wisdom of the stars with your intuition to make the perfect prediction!",
+      "namePlaceholder": "Enter your name",
+      "start": "Start My Prediction"
+    },
+    "zodiac": {
+      "title": "Baby's Zodiac Sign",
+      "description": "What zodiac sign do you think the baby will have? Choose your prediction!"
+    },
+    "gender": {
+      "title": "Make Your Guess",
+      "description": "Now, let your intuition guide you. What does your heart tell you?"
+    },
+    "nameSuggestion": {
+      "title": "Suggest a Name",
+      "description": "What would you name this little {gender}?",
+      "placeholder": "Enter a name suggestion",
+      "continue": "Continue",
+      "skip": "Skip this step"
+    },
+    "wishes": {
+      "title": "Share Your Wishes",
+      "description": "Leave a special message for the baby and parents",
+      "placeholder": "Write your heartfelt wishes, blessings, or advice for the new family...",
+      "finish": "Complete Prediction"
+    },
+    "result": {
+      "title": "Wonderful prediction, {name}!",
+      "zodiac": {
+        "aries": "As an Aries, your bold intuition rarely leads you astray!",
+        "taurus": "Your Taurus patience and wisdom guide your prediction well!",
+        "gemini": "Your Gemini curiosity has led you to an interesting choice!",
+        "cancer": "Your Cancer intuition is deeply connected to family matters!",
+        "leo": "Your Leo confidence shines through in your prediction!",
+        "virgo": "Your Virgo attention to detail makes for a thoughtful guess!",
+        "libra": "Your Libra balance helps you see all possibilities!",
+        "scorpio": "Your Scorpio intensity reveals deep insights!",
+        "sagittarius": "Your Sagittarius optimism makes every prediction exciting!",
+        "capricorn": "Your Capricorn wisdom brings practical insight!",
+        "aquarius": "Your Aquarius uniqueness shows in your prediction!",
+        "pisces": "Your Pisces intuition flows like water to the truth!"
+      },
+      "guess": "You predicted: {guess}",
+      "suggestedName": "Your name suggestion: {name}",
+      "thanks": "Thank you for sharing your prediction with us!",
+      "submit": "Submit Prediction",
+      "submitting": "Submitting...",
+      "tryAgain": "Make Another Prediction"
+    }
   }
 }

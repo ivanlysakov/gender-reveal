@@ -1,0 +1,349 @@
+/* Duckling Theme - Light Green & Yellow Gender Reveal */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Fredoka:wght@300;400;500;600;700&family=Grandstander:wght@400;600;700&display=swap');
+
+:root {
+  /* Light Green Color Palette */
+  --duckling-mint: #E8F5E9;
+  --duckling-sage: #C8E6C9;
+  --duckling-green: #A5D6A7;
+  --duckling-meadow: #81C784;
+  --duckling-forest: #66BB6A;
+  
+  /* Yellow Duck Colors */
+  --duckling-yellow: #FFF59D;
+  --duckling-sunshine: #FFF176;
+  --duckling-gold: #FFEB3B;
+  --duckling-amber: #FFC107;
+  
+  /* Neutral Colors */
+  --duckling-cream: #FFFEF7;
+  --duckling-white: #FFFFFF;
+  --duckling-gray: #546E7A;
+  --duckling-dark: #37474F;
+  
+  /* Accent Colors */
+  --duckling-sky: #81D4FA;
+  --duckling-peach: #FFCCBC;
+  --duckling-lavender: #CE93D8;
+}
+
+/* Background */
+.duckling-bg {
+  background: linear-gradient(180deg, 
+    var(--duckling-mint) 0%, 
+    var(--duckling-sage) 50%, 
+    var(--duckling-cream) 100%
+  );
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fairy Tale Background Pattern */
+.fairy-tale-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--duckling-green) 2px, transparent 2px),
+    radial-gradient(circle at 80% 70%, var(--duckling-yellow) 2px, transparent 2px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* Typography */
+.duckling-font {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+}
+
+.duckling-title {
+  font-family: 'Grandstander', 'Fredoka', cursive;
+  font-weight: 700;
+  color: var(--duckling-dark);
+}
+
+.duckling-text {
+  font-family: 'Nunito', sans-serif;
+  color: var(--duckling-gray);
+}
+
+/* Main Title Style */
+.duckling-hero-title {
+  font-family: 'Grandstander', cursive;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--duckling-forest);
+  text-shadow: 2px 2px 0 var(--duckling-yellow);
+  letter-spacing: -0.02em;
+}
+
+/* Card Styles */
+.duckling-card {
+  background: var(--duckling-white);
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 20px rgba(129, 199, 132, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.duckling-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--duckling-mint) 0%, transparent 70%);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.duckling-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Button Styles */
+.duckling-button {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.duckling-button-primary {
+  background: linear-gradient(135deg, var(--duckling-meadow) 0%, var(--duckling-forest) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+}
+
+.duckling-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 187, 106, 0.4);
+}
+
+.duckling-button-secondary {
+  background: var(--duckling-yellow);
+  color: var(--duckling-dark);
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+}
+
+.duckling-button-secondary:hover {
+  background: var(--duckling-sunshine);
+  transform: translateY(-2px);
+}
+
+/* Form Inputs */
+.duckling-input {
+  font-family: 'Nunito', sans-serif;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--duckling-sage);
+  border-radius: 15px;
+  background: var(--duckling-white);
+  transition: all 0.3s ease;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.duckling-input:focus {
+  outline: none;
+  border-color: var(--duckling-meadow);
+  box-shadow: 0 0 0 4px rgba(129, 199, 132, 0.2);
+}
+
+.duckling-textarea {
+  resize: vertical;
+  min-height: 100px;
+  border-radius: 15px;
+}
+
+/* Vote Cards */
+.vote-card {
+  background: var(--duckling-white);
+  border: 3px solid var(--duckling-sage);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vote-card:hover {
+  border-color: var(--duckling-meadow);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(129, 199, 132, 0.2);
+}
+
+.vote-card.selected {
+  background: var(--duckling-mint);
+  border-color: var(--duckling-forest);
+}
+
+/* Astrology Cards */
+.astrology-card {
+  background: linear-gradient(135deg, var(--duckling-white) 0%, var(--duckling-cream) 100%);
+  border: 2px solid var(--duckling-sage);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.astrology-card:hover {
+  border-color: var(--duckling-lavender);
+  background: linear-gradient(135deg, var(--duckling-lavender) 0%, var(--duckling-white) 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Guest Book Entry */
+.guestbook-entry {
+  background: var(--duckling-white);
+  border-left: 4px solid var(--duckling-meadow);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.guestbook-entry:hover {
+  box-shadow: 0 4px 15px rgba(129, 199, 132, 0.1);
+  transform: translateX(5px);
+}
+
+/* Photo Gallery */
+.photo-frame {
+  background: var(--duckling-white);
+  border: 3px solid var(--duckling-sage);
+  border-radius: 15px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.photo-frame:hover {
+  border-color: var(--duckling-meadow);
+  transform: rotate(-2deg) scale(1.05);
+}
+
+.photo-frame::after {
+  content: '🦆';
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 2rem;
+  transform: rotate(15deg);
+}
+
+/* Mini Game Styles */
+.game-container {
+  background: var(--duckling-mint);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.game-option {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--duckling-white);
+  border: 2px solid var(--duckling-meadow);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-option:hover {
+  background: var(--duckling-yellow);
+  transform: scale(1.1);
+}
+
+/* Floating Elements */
+.floating-element {
+  position: absolute;
+  animation: float-around 20s infinite ease-in-out;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+@keyframes float-around {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(50px, -30px) rotate(90deg);
+  }
+  50% {
+    transform: translate(-30px, -50px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-50px, 30px) rotate(270deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .duckling-hero-title {
+    font-size: 3rem;
+  }
+  
+  .duckling-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Loader for voting */
+.vote-loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--duckling-sage);
+  border-top-color: var(--duckling-forest);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Animation */
+.success-checkmark {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: var(--duckling-meadow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scale-in 0.3s ease-out;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

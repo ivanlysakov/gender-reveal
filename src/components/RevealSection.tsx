@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
-export default function RevealSection() {
+interface RevealSectionProps {
+  onRevealComplete?: () => void;
+}
+
+export default function RevealSection({ onRevealComplete }: RevealSectionProps) {
   const t = useTranslations("reveal");
   const tGuessing = useTranslations("guessing");
   const [isRevealed, setIsRevealed] = useState(false);
@@ -17,9 +21,15 @@ export default function RevealSection() {
   });
 
   useEffect(() => {
-    setIsRevealed(partyData.isRevealed);
-    setActualGender(partyData.actualGender);
-  }, [partyData]);
+    // Only set initial state from partyData, don't override local state changes
+    if (!isRevealed && !showAnimation) {
+      setIsRevealed(partyData.isRevealed);
+      setActualGender(partyData.actualGender);
+    }
+    if (partyData.isRevealed && onRevealComplete) {
+      onRevealComplete();
+    }
+  }, [partyData, onRevealComplete, isRevealed, showAnimation]);
 
   const handleReveal = () => {
     setShowAnimation(true);
@@ -27,6 +37,16 @@ export default function RevealSection() {
       setIsRevealed(true);
       setActualGender("girl"); // This would come from admin panel
       setShowAnimation(false);
+      if (onRevealComplete) {
+        onRevealComplete();
+      }
+      // Ensure the reveal content is visible
+      setTimeout(() => {
+        const revealSection = document.getElementById('reveal-section');
+        if (revealSection) {
+          revealSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }, 3000);
   };
 
@@ -45,7 +65,7 @@ export default function RevealSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-blue-400/20 rounded-3xl blur-3xl animate-pulse"></div>
             <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-16 shadow-2xl border border-white/40">
               <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-12">
-                The Big Reveal!
+                {t("bigRevealTitle")}
               </h2>
 
               {/* Animated reveal effects */}
@@ -60,7 +80,7 @@ export default function RevealSection() {
               </div>
 
               <p className="text-2xl md:text-3xl text-gray-700 mt-12 font-medium">
-                Drum roll please...
+                {t("drumRoll")}
               </p>
 
               {/* Loading animation */}
@@ -132,7 +152,7 @@ export default function RevealSection() {
 
               <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-white/40">
                 <h2 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 bg-clip-text text-transparent mb-8">
-                  It&apos;s Official!
+                  {t("itsOfficial")}
                 </h2>
                 <div className="flex justify-center gap-4 text-4xl mb-8">
                   <span className="animate-bounce">🎉</span>
@@ -217,17 +237,17 @@ export default function RevealSection() {
                   >
                     <div className="text-6xl mb-4">👶</div>
                     <div className="text-2xl font-black text-blue-600 mb-4">
-                      Team Boy
+                      {t("teamBoy")}
                     </div>
                     <div className="text-5xl font-black text-blue-600 mb-2">
                       12
                     </div>
                     <div className="text-lg text-blue-500 mb-4">
-                      predictions
+                      {t("predictions")}
                     </div>
                     {actualGender === "boy" && (
                       <div className="text-blue-600 font-bold text-xl animate-bounce">
-                        🎉 WINNERS! 🎉
+                        🎉 {t("winners")} 🎉
                       </div>
                     )}
                     {actualGender === "boy" && (
@@ -244,17 +264,17 @@ export default function RevealSection() {
                   >
                     <div className="text-6xl mb-4">👧</div>
                     <div className="text-2xl font-black text-pink-600 mb-4">
-                      Team Girl
+                      {t("teamGirl")}
                     </div>
                     <div className="text-5xl font-black text-pink-600 mb-2">
                       8
                     </div>
                     <div className="text-lg text-pink-500 mb-4">
-                      predictions
+                      {t("predictions")}
                     </div>
                     {actualGender === "girl" && (
                       <div className="text-pink-600 font-bold text-xl animate-bounce">
-                        🎉 WINNERS! 🎉
+                        🎉 {t("winners")} 🎉
                       </div>
                     )}
                     {actualGender === "girl" && (
@@ -270,7 +290,7 @@ export default function RevealSection() {
                     <span className="animate-bounce delay-400">🥳</span>
                   </div>
                   <p className="text-xl text-gray-700 font-medium">
-                    Congratulations to everyone who guessed correctly!
+                    {t("congratsToWinners")}
                   </p>
                 </div>
               </div>
@@ -283,7 +303,7 @@ export default function RevealSection() {
             <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-white/40">
               <div className="text-center mb-8">
                 <h3 className="text-5xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
-                  Thank You!
+                  {t("thankYou")}
                 </h3>
                 <div className="flex justify-center gap-4 text-4xl mb-8">
                   <span className="animate-pulse">💕</span>
@@ -345,8 +365,7 @@ export default function RevealSection() {
             </h2>
 
             <p className="text-2xl md:text-3xl text-gray-700 mb-12 leading-relaxed">
-              The moment we&apos;ve all been waiting for! The gender reveal will
-              happen during our celebration.
+              {t("waitingForMoment")}
             </p>
 
             <div className="relative group max-w-3xl mx-auto mb-12">
@@ -354,10 +373,10 @@ export default function RevealSection() {
               <div className="relative bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 backdrop-blur-lg rounded-2xl p-10 shadow-xl border border-white/40">
                 <div className="text-6xl mb-6 animate-bounce">⏰</div>
                 <p className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-                  December 31st, 2024 at 3:00 PM
+                  {t("revealDate")}
                 </p>
                 <p className="text-xl text-gray-700 mb-6">
-                  The most exciting New Year&apos;s Eve surprise! 🎆
+                  {t("newYearSurprise")}
                 </p>
                 <div className="flex justify-center gap-4 text-3xl">
                   <span className="animate-bounce">🎊</span>
@@ -369,7 +388,7 @@ export default function RevealSection() {
 
             <div className="mb-12">
               <p className="text-xl text-gray-600 mb-8">
-                Stay tuned - this page will update with the big news!
+                {t("stayTuned")}
               </p>
               <div className="flex justify-center gap-3">
                 <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
@@ -381,7 +400,7 @@ export default function RevealSection() {
             {/* Demo button - enhanced design */}
             <div className="border-t border-gray-200 pt-12">
               <p className="text-lg text-gray-500 mb-6">
-                Demo: Click to see the reveal animation
+                {t("demoText")}
               </p>
               <button
                 onClick={handleReveal}
@@ -390,7 +409,7 @@ export default function RevealSection() {
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center gap-3">
                   <span className="text-3xl">🎉</span>
-                  Reveal Now (Demo)
+                  {t("revealNowDemo")}
                   <span className="text-3xl">✨</span>
                 </span>
               </button>

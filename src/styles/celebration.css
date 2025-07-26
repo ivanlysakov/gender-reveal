@@ -1,0 +1,377 @@
+/* Celebration Theme - Gender Reveal Party Design System */
+
+:root {
+  /* Pastel Color Palette */
+  --celebration-pink: #FFB6D9;
+  --celebration-pink-light: #FFEAF4;
+  --celebration-pink-soft: #FFD6EC;
+  --celebration-blue: #B6E5FF;
+  --celebration-blue-light: #E6F4FF;
+  --celebration-blue-soft: #CCE9FF;
+  --celebration-yellow: #FFE4B5;
+  --celebration-gold: #FFD700;
+  --celebration-cream: #FFFEF5;
+  --celebration-white: #FFFFFF;
+  --celebration-gray: #6B7280;
+  --celebration-confetti-purple: #E0B6FF;
+  --celebration-confetti-green: #B6FFD9;
+}
+
+/* Celebration Backgrounds */
+.celebration-gradient {
+  background: linear-gradient(135deg, var(--celebration-pink-light) 0%, var(--celebration-blue-light) 100%);
+}
+
+.celebration-gradient-soft {
+  background: linear-gradient(180deg, var(--celebration-cream) 0%, var(--celebration-pink-light) 50%, var(--celebration-blue-light) 100%);
+}
+
+.celebration-gradient-radial {
+  background: radial-gradient(circle at center, var(--celebration-white) 0%, var(--celebration-pink-light) 40%, var(--celebration-blue-light) 100%);
+}
+
+/* Cloud Patterns */
+.cloud-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.cloud-pattern::before,
+.cloud-pattern::after {
+  content: '';
+  position: absolute;
+  background: var(--celebration-white);
+  opacity: 0.6;
+  border-radius: 100px;
+}
+
+.cloud-pattern::before {
+  width: 100px;
+  height: 40px;
+  top: 20%;
+  left: 10%;
+  box-shadow: 
+    120px 0 0 20px var(--celebration-white),
+    240px 10px 0 10px var(--celebration-white),
+    80px 15px 0 5px var(--celebration-white);
+}
+
+.cloud-pattern::after {
+  width: 80px;
+  height: 35px;
+  top: 60%;
+  right: 15%;
+  box-shadow: 
+    -100px 0 0 15px var(--celebration-white),
+    -200px -10px 0 25px var(--celebration-white);
+}
+
+/* Confetti Animation */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--celebration-pink);
+  animation: confetti-fall 3s linear infinite;
+}
+
+.confetti:nth-child(odd) {
+  background: var(--celebration-blue);
+  width: 8px;
+  height: 8px;
+  animation-duration: 4s;
+}
+
+.confetti:nth-child(3n) {
+  background: var(--celebration-gold);
+  border-radius: 50%;
+  animation-duration: 2.5s;
+}
+
+.confetti:nth-child(4n) {
+  background: var(--celebration-confetti-purple);
+  width: 6px;
+  height: 12px;
+  animation-duration: 3.5s;
+}
+
+.confetti:nth-child(5n) {
+  background: var(--celebration-confetti-green);
+  border-radius: 50%;
+  animation-duration: 2.8s;
+}
+
+/* Balloon Decorations */
+.balloon {
+  position: relative;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+.balloon-pink {
+  background: var(--celebration-pink);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: inset -10px -10px 0 rgba(0, 0, 0, 0.07);
+}
+
+.balloon-blue {
+  background: var(--celebration-blue);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: inset -10px -10px 0 rgba(0, 0, 0, 0.07);
+}
+
+/* Question Mark Decoration */
+.question-mark-float {
+  animation: question-float 4s ease-in-out infinite;
+}
+
+@keyframes question-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  75% {
+    transform: translateY(5px) scale(0.95);
+  }
+}
+
+/* Celebration Card Styles */
+.celebration-card {
+  background: var(--celebration-white);
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 6px -1px rgba(255, 182, 217, 0.1),
+    0 2px 4px -1px rgba(182, 229, 255, 0.06),
+    0 20px 25px -5px rgba(255, 182, 217, 0.1);
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(var(--celebration-white), var(--celebration-white)),
+    linear-gradient(45deg, var(--celebration-pink-soft), var(--celebration-blue-soft));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.celebration-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--celebration-pink) 0%, 
+    var(--celebration-blue) 50%, 
+    var(--celebration-pink) 100%);
+  border-radius: 20px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.celebration-card:hover::before {
+  opacity: 0.3;
+}
+
+/* Celebration Button Styles */
+.celebration-button {
+  background: linear-gradient(45deg, var(--celebration-pink), var(--celebration-blue));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  font-weight: bold;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 182, 217, 0.4);
+}
+
+.celebration-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 182, 217, 0.5);
+}
+
+.celebration-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.celebration-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Typography */
+.celebration-heading {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Bradley Hand', cursive;
+  background: linear-gradient(45deg, var(--celebration-pink), var(--celebration-blue), var(--celebration-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-weight: bold;
+}
+
+.celebration-text {
+  font-family: 'Quicksand', 'Fredoka', 'Nunito', sans-serif;
+  color: var(--celebration-gray);
+  line-height: 1.6;
+}
+
+/* Star Decorations */
+.star-decoration {
+  display: inline-block;
+  position: relative;
+  color: var(--celebration-gold);
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.8);
+  }
+}
+
+/* Ribbon Banner */
+.ribbon-banner {
+  position: relative;
+  background: var(--celebration-pink);
+  color: white;
+  padding: 10px 40px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-banner::before,
+.ribbon-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  border: 20px solid transparent;
+}
+
+.ribbon-banner::before {
+  left: -30px;
+  border-right-color: var(--celebration-pink);
+  border-left: none;
+}
+
+.ribbon-banner::after {
+  right: -30px;
+  border-left-color: var(--celebration-pink);
+  border-right: none;
+}
+
+/* Gender Icons */
+.gender-icon-container {
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.gender-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  transition: all 0.3s ease;
+}
+
+.gender-icon-pink {
+  background: var(--celebration-pink-light);
+  border: 3px solid var(--celebration-pink);
+}
+
+.gender-icon-blue {
+  background: var(--celebration-blue-light);
+  border: 3px solid var(--celebration-blue);
+}
+
+.gender-icon:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+/* Dotted Pattern Background */
+.dots-pattern {
+  background-image: 
+    radial-gradient(circle, var(--celebration-pink) 1px, transparent 1px),
+    radial-gradient(circle, var(--celebration-blue) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.1;
+}
+
+/* Wavy Border */
+.wavy-border {
+  position: relative;
+}
+
+.wavy-border::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      var(--celebration-pink),
+      var(--celebration-pink) 10px,
+      var(--celebration-blue) 10px,
+      var(--celebration-blue) 20px
+    );
+  border-radius: 0 0 50% 50% / 0 0 20px 20px;
+}

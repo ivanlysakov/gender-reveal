@@ -53,13 +53,13 @@ export default function RSVPSection() {
               {formData.attending ? "🎉" : "💙"}
             </div>
             <h3 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-6">
-              {formData.attending ? "We&apos;re so excited!" : "We understand!"}
+              {formData.attending ? t("thankYouAttending") : t("thankYouNotAttending")}
             </h3>
             <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 mb-8">
               <p className="text-xl text-gray-700 mb-4">
                 {formData.attending
-                  ? "Thank you for confirming your attendance! We can&apos;t wait to celebrate with you!"
-                  : "We&apos;ll miss you, but we understand. We&apos;ll share photos and updates with you!"}
+                  ? t("confirmationAttending")
+                  : t("confirmationNotAttending")}
               </p>
               <div className="flex items-center justify-center gap-3 text-2xl">
                 {formData.attending ? (
@@ -134,7 +134,7 @@ export default function RSVPSection() {
                         handleInputChange("name", e.target.value)
                       }
                       className="glass-input w-full text-lg"
-                      placeholder="Enter your full name"
+                      placeholder={t("namePlaceholder")}
                       required
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-2xl">
@@ -235,7 +235,7 @@ export default function RSVPSection() {
                   onChange={(e) => handleInputChange("message", e.target.value)}
                   rows={5}
                   className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg bg-white/80 backdrop-blur-sm resize-none"
-                  placeholder="Share your excitement, dietary requirements, or any special messages..."
+                  placeholder={t("messagePlaceholder")}
                 />
               </div>
 

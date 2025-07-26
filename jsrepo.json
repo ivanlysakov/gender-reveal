@@ -1,0 +1,10 @@
+{
+  "registries": {
+    "https://reactbits.dev/tailwind/": {
+      "resolvedPaths": {
+        "utils": "./src/lib/utils",
+        "blocks": "./src/components/reactbits"
+      }
+    }
+  }
+}

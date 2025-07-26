@@ -163,7 +163,7 @@ export default function PhotoGallery() {
               <div className="aspect-square relative overflow-hidden">
                 <Image
                   src={photo.url}
-                  alt={photo.caption || "Gallery photo"}
+                  alt={photo.caption || t("galleryPhoto")}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
@@ -209,10 +209,10 @@ export default function PhotoGallery() {
             <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-12 shadow-xl border border-white/40">
               <div className="text-8xl mb-6 animate-bounce">📷</div>
               <h3 className="text-3xl font-bold text-gray-800 mb-4">
-                No photos yet
+                {t("noPhotosYet")}
               </h3>
               <p className="text-xl text-gray-600">
-                Check back soon for more beautiful memories!
+                {t("checkBackSoon")}
               </p>
               <div className="flex justify-center gap-2 mt-6">
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
@@ -245,7 +245,7 @@ export default function PhotoGallery() {
               <div className="relative aspect-square max-w-3xl max-h-[80vh]">
                 <Image
                   src={selectedPhoto.url}
-                  alt={selectedPhoto.caption || "Gallery photo"}
+                  alt={selectedPhoto.caption || t("galleryPhoto")}
                   fill
                   className="object-cover"
                 />
@@ -278,27 +278,6 @@ export default function PhotoGallery() {
         </div>
       )}
 
-      {/* Enhanced Upload Section */}
-      <div className="mt-20 text-center">
-        <div className="relative group max-w-4xl mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-300/20 via-purple-300/20 to-pink-300/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
-          <div className="relative bg-white/70 backdrop-blur-xl rounded-3xl p-12 border-2 border-dashed border-gray-300 hover:border-purple-300 transition-all duration-500">
-            <div className="text-8xl mb-6 animate-bounce">📸</div>
-            <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-              More Memories Coming Soon!
-            </h3>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-6">
-              We&apos;ll be adding more beautiful moments from our pregnancy
-              journey. Stay tuned for updates!
-            </p>
-            <div className="flex justify-center gap-3 text-3xl">
-              <span className="animate-bounce">💕</span>
-              <span className="animate-bounce delay-200">👶</span>
-              <span className="animate-bounce delay-400">✨</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

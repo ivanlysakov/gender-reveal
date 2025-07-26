@@ -1,0 +1,324 @@
+/* Duck Party Theme - Gender Reveal Design System */
+
+:root {
+  /* Duck Party Colors */
+  --duck-black: #1a1a1a;
+  --duck-yellow: #FFD93D;
+  --duck-blue: #6BCFFF;
+  --duck-pink: #FF6B9D;
+  --duck-orange: #FFA94D;
+  --duck-purple: #C56BFF;
+  --duck-green: #95E1A4;
+  --duck-white: #FFFFFF;
+  --duck-cream: #FFF8E7;
+  
+  /* Text Colors */
+  --duck-text-yellow: #FFE066;
+  --duck-text-pink: #FF8FAB;
+  --duck-text-blue: #8DD9FF;
+  --duck-text-white: #FFFFFF;
+}
+
+/* Black Chalkboard Background */
+.duck-party-bg {
+  background-color: var(--duck-black);
+  background-image: 
+    radial-gradient(circle at 20% 80%, transparent 50%, rgba(255, 217, 61, 0.05) 50%),
+    radial-gradient(circle at 80% 20%, transparent 50%, rgba(107, 207, 255, 0.05) 50%),
+    radial-gradient(circle at 40% 40%, transparent 50%, rgba(255, 107, 157, 0.05) 50%);
+  position: relative;
+}
+
+/* Chalk texture overlay */
+.chalk-texture {
+  position: relative;
+}
+
+.chalk-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(255, 255, 255, 0.02) 4px
+    );
+  pointer-events: none;
+}
+
+/* Bunting/Banner Styles */
+.bunting-container {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.bunting-string {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, 
+    var(--duck-pink) 0%, 
+    var(--duck-yellow) 25%, 
+    var(--duck-blue) 50%, 
+    var(--duck-green) 75%, 
+    var(--duck-pink) 100%
+  );
+  transform: translateY(-1px);
+}
+
+.bunting-flag {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 40px solid var(--duck-pink);
+  top: 20px;
+  animation: gentle-sway 3s ease-in-out infinite;
+}
+
+.bunting-flag:nth-child(2) { left: 10%; border-top-color: var(--duck-blue); animation-delay: 0.2s; }
+.bunting-flag:nth-child(3) { left: 20%; border-top-color: var(--duck-yellow); animation-delay: 0.4s; }
+.bunting-flag:nth-child(4) { left: 30%; border-top-color: var(--duck-green); animation-delay: 0.6s; }
+.bunting-flag:nth-child(5) { left: 40%; border-top-color: var(--duck-orange); animation-delay: 0.8s; }
+.bunting-flag:nth-child(6) { left: 50%; border-top-color: var(--duck-purple); animation-delay: 1s; }
+.bunting-flag:nth-child(7) { left: 60%; border-top-color: var(--duck-pink); animation-delay: 1.2s; }
+.bunting-flag:nth-child(8) { left: 70%; border-top-color: var(--duck-blue); animation-delay: 1.4s; }
+.bunting-flag:nth-child(9) { left: 80%; border-top-color: var(--duck-yellow); animation-delay: 1.6s; }
+.bunting-flag:nth-child(10) { left: 90%; border-top-color: var(--duck-green); animation-delay: 1.8s; }
+
+@keyframes gentle-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* Duck Styles */
+.rubber-duck {
+  position: relative;
+  display: inline-block;
+  animation: float-duck 4s ease-in-out infinite;
+}
+
+@keyframes float-duck {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(5deg);
+  }
+}
+
+.duck-yellow {
+  filter: drop-shadow(0 4px 8px rgba(255, 217, 61, 0.3));
+}
+
+.duck-blue {
+  filter: drop-shadow(0 4px 8px rgba(107, 207, 255, 0.3));
+}
+
+/* Water ripple effect */
+.water-ripple {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, 
+    rgba(107, 207, 255, 0.3) 0%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: ripple 3s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0%, 100% {
+    transform: translateX(-50%) scaleX(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Chalk-style Typography */
+.chalk-text {
+  font-family: var(--font-kalam), 'Comic Sans MS', 'Chalkboard SE', cursive;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.chalk-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+.chalk-yellow { color: var(--duck-text-yellow); }
+.chalk-pink { color: var(--duck-text-pink); }
+.chalk-blue { color: var(--duck-text-blue); }
+.chalk-white { color: var(--duck-text-white); }
+
+/* Colorful dots/confetti */
+.party-dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.party-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: float-dots 10s linear infinite;
+}
+
+@keyframes float-dots {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.party-dot:nth-child(odd) { background: var(--duck-pink); }
+.party-dot:nth-child(even) { background: var(--duck-blue); }
+.party-dot:nth-child(3n) { background: var(--duck-yellow); }
+.party-dot:nth-child(4n) { background: var(--duck-green); }
+.party-dot:nth-child(5n) { background: var(--duck-orange); }
+
+/* Duck Party Card */
+.duck-party-card {
+  background: rgba(30, 30, 30, 0.9);
+  border: 3px solid transparent;
+  background-image: 
+    linear-gradient(rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.9)),
+    linear-gradient(45deg, 
+      var(--duck-pink) 0%, 
+      var(--duck-blue) 25%, 
+      var(--duck-yellow) 50%, 
+      var(--duck-green) 75%, 
+      var(--duck-pink) 100%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-radius: 20px;
+  box-shadow: 
+    0 0 30px rgba(255, 107, 157, 0.2),
+    0 0 30px rgba(107, 207, 255, 0.2),
+    0 0 30px rgba(255, 217, 61, 0.2);
+}
+
+/* He or She text style */
+.he-or-she {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.he-text {
+  color: var(--duck-text-blue);
+  font-family: var(--font-kalam), cursive;
+  transform: rotate(-5deg);
+}
+
+.or-text {
+  color: var(--duck-text-white);
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.she-text {
+  color: var(--duck-text-pink);
+  font-family: var(--font-kalam), cursive;
+  transform: rotate(5deg);
+}
+
+/* Decorative stars */
+.star-sparkle {
+  display: inline-block;
+  color: var(--duck-yellow);
+  animation: sparkle-star 2s ease-in-out infinite;
+}
+
+@keyframes sparkle-star {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Duck button */
+.duck-button {
+  background: linear-gradient(135deg, var(--duck-pink) 0%, var(--duck-blue) 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: var(--font-kalam), cursive;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.duck-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 30px rgba(107, 207, 255, 0.5);
+}
+
+.duck-button::before {
+  content: '🦆';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  top: 50%;
+  left: -40px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.duck-button:hover::before {
+  left: 10px;
+  opacity: 0.3;
+}

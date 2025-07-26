@@ -65,105 +65,77 @@ export default function DuckMascot({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Duck body */}
-        <ellipse
-          cx="100"
-          cy="130"
-          rx="60"
-          ry="50"
-          fill="#FFCC00"
-          stroke="#FFB700"
-          strokeWidth="2"
+        {/* Duck body - simplified rounded shape */}
+        <path
+          d="M 100 50 
+             C 130 50, 160 80, 160 120
+             C 160 160, 130 180, 100 180
+             C 70 180, 40 160, 40 120
+             C 40 80, 70 50, 100 50"
+          fill="#71C5B8"
         />
         
-        {/* Duck head */}
-        <circle
-          cx="100"
-          cy="80"
-          r="40"
-          fill="#FFCC00"
-          stroke="#FFB700"
-          strokeWidth="2"
+        {/* Wing detail */}
+        <path
+          d="M 130 100
+             C 145 95, 150 110, 145 125
+             C 140 140, 125 135, 120 120"
+          fill="#5BA69B"
+          opacity="0.6"
         />
         
         {/* Beak */}
         <path
-          d="M 70 85 Q 60 85 65 90 Q 70 95 80 90 Z"
-          fill="#FFA500"
-          stroke="#FF8C00"
-          strokeWidth="1.5"
+          d="M 70 85 L 55 85 L 65 95 Z"
+          fill="#F5C85F"
         />
         
-        {/* Eyes */}
-        <circle cx="85" cy="75" r="8" fill="#FFFFFF" />
-        <circle cx="115" cy="75" r="8" fill="#FFFFFF" />
-        <circle cx="87" cy="77" r="5" fill="#000000" />
-        <circle cx="117" cy="77" r="5" fill="#000000" />
-        <circle cx="88" cy="76" r="2" fill="#FFFFFF" />
-        <circle cx="118" cy="76" r="2" fill="#FFFFFF" />
+        {/* Eye */}
+        <circle cx="85" cy="80" r="3" fill="#2B3E3A" />
         
-        {/* Wings */}
-        <ellipse
-          cx="55"
-          cy="130"
-          rx="25"
-          ry="35"
-          fill="#FFD700"
-          stroke="#FFB700"
-          strokeWidth="2"
-          transform="rotate(-15 55 130)"
+        {/* Simple cute detail on body */}
+        <circle
+          cx="100"
+          cy="120"
+          r="25"
+          fill="#4A6B5D"
         />
-        <ellipse
-          cx="145"
-          cy="130"
-          rx="25"
-          ry="35"
-          fill="#FFD700"
-          stroke="#FFB700"
-          strokeWidth="2"
-          transform="rotate(15 145 130)"
-        />
-        
-        {/* Cute cheeks */}
-        <circle cx="65" cy="90" r="8" fill="#FFB6C1" opacity="0.5" />
-        <circle cx="135" cy="90" r="8" fill="#FFB6C1" opacity="0.5" />
         
         {/* Water ripples for swimming variant */}
         {variant === "swimming" && (
           <>
             <ellipse
               cx="100"
-              cy="170"
-              rx="80"
-              ry="15"
+              cy="175"
+              rx="70"
+              ry="12"
               fill="none"
-              stroke="#A0D6D0"
-              strokeWidth="2"
-              opacity="0.5"
+              stroke="#A8DADC"
+              strokeWidth="3"
+              opacity="0.4"
             />
             <ellipse
               cx="100"
-              cy="175"
-              rx="60"
-              ry="10"
+              cy="180"
+              rx="50"
+              ry="8"
               fill="none"
-              stroke="#A0D6D0"
+              stroke="#A8DADC"
               strokeWidth="2"
               opacity="0.3"
             />
           </>
         )}
         
-        {/* Lily pad for sitting variant */}
+        {/* Sitting on lily pad */}
         {variant === "sitting" && (
           <ellipse
             cx="100"
-            cy="170"
-            rx="70"
-            ry="20"
-            fill="#B2E7A3"
-            stroke="#8BC34A"
-            strokeWidth="2"
+            cy="175"
+            rx="65"
+            ry="18"
+            fill="#B5D6B2"
+            opacity="0.7"
           />
         )}
       </svg>
