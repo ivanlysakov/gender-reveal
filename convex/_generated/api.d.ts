@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as guesses from "../guesses.js";
+import type * as init from "../init.js";
 import type * as party from "../party.js";
 import type * as rsvp from "../rsvp.js";
 
@@ -27,6 +28,7 @@ import type * as rsvp from "../rsvp.js";
  */
 declare const fullApi: ApiFromModules<{
   guesses: typeof guesses;
+  init: typeof init;
   party: typeof party;
   rsvp: typeof rsvp;
 }>;

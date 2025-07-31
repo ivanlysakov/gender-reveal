@@ -27,7 +27,6 @@ export default defineSchema({
 
   // Gender guesses/votes
   guesses: defineTable({
-    partyId: v.id("party"),
     name: v.string(),
     email: v.optional(v.string()),
     guess: v.union(v.literal("boy"), v.literal("girl")),
@@ -36,7 +35,7 @@ export default defineSchema({
     wishes: v.optional(v.string()),
     message: v.optional(v.string()),
     createdAt: v.string(),
-  }).index("by_party", ["partyId"]),
+  }),
 
   // Photo gallery
   photos: defineTable({

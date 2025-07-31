@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 type Step =
@@ -32,8 +32,7 @@ export default function UnifiedPrediction() {
   const [hasAlreadyPredicted, setHasAlreadyPredicted] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Get party data and submit guess mutation
-  const party = useQuery(api.party.getParty);
+  // Get submit guess mutation
   const submitGuess = useMutation(api.guesses.submitGuess);
 
   // Check localStorage on component mount
@@ -75,20 +74,22 @@ export default function UnifiedPrediction() {
   };
 
   const handleSubmit = async () => {
-    if (
-      !predictionData.name ||
-      !predictionData.genderGuess ||
-      isSubmitted ||
-      hasAlreadyPredicted ||
-      !party?._id
-    )
+    console.log("Submit clicked", { predictionData, isSubmitted, hasAlreadyPredicted });
+    
+    if (!predictionData.name || !predictionData.genderGuess) {
+      console.log("Missing name or gender guess");
       return;
+    }
+    
+    if (isSubmitted || hasAlreadyPredicted) {
+      console.log("Already submitted or predicted");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
       // Submit to Convex database
       await submitGuess({
-        partyId: party._id,
         name: predictionData.name,
         guess: predictionData.genderGuess,
         zodiacSign: predictionData.zodiacSign as "sagittarius" | "capricorn" | undefined,
@@ -111,8 +112,10 @@ export default function UnifiedPrediction() {
 
       setIsSubmitted(true);
       setHasAlreadyPredicted(true);
+      console.log("Prediction submitted successfully");
     } catch (error) {
       console.error("Failed to submit guess:", error);
+      alert("Failed to submit your prediction. Please try again.");
     }
     setIsSubmitting(false);
   };
@@ -209,7 +212,27 @@ export default function UnifiedPrediction() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto relative">
+      {/* Global Back Button */}
+      {currentStep !== "welcome" && (
+        <button
+          onClick={handleBack}
+          className="absolute top-0 left-0 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group z-10"
+        >
+          <svg
+            className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+      )}
+      
       <div className="min-h-[500px] flex items-center justify-center relative">
         <AnimatePresence mode="wait">
           {/* Welcome Step */}
@@ -263,22 +286,6 @@ export default function UnifiedPrediction() {
               exit={{ opacity: 0, y: -20 }}
               className="text-center max-w-3xl w-full px-4"
             >
-              <button
-                onClick={handleBack}
-                className="absolute top-4 left-4 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <svg
-                  className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 19l-7-7 7-7"></path>
-                </svg>
-              </button>
               <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2C5282] mb-8">
                 {t("prediction.gender.title")}
               </h3>
@@ -291,22 +298,16 @@ export default function UnifiedPrediction() {
                   className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-100 to-blue-200 p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 border-3 border-blue-300"
                 >
                   <div className="relative z-10">
-                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4">
-                      <div className="absolute inset-0 overflow-hidden">
-                        <Image
-                          src="/images/ducks.png"
-                          alt="Boy Duck"
-                          width={512}
-                          height={256}
-                          className="object-cover"
-                          style={{ 
-                            width: '200%',
-                            height: '100%',
-                            objectPosition: 'left center',
-                            maxWidth: 'none'
-                          }}
-                        />
-                      </div>
+                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 overflow-hidden">
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage: 'url(/images/ducks.png)',
+                          backgroundSize: '200% 100%',
+                          backgroundPosition: 'left center',
+                          backgroundRepeat: 'no-repeat'
+                        }}
+                      />
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-blue-600">
                       {t("guessing.boy")}
@@ -322,22 +323,16 @@ export default function UnifiedPrediction() {
                   className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-pink-100 to-pink-200 p-6 sm:p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 border-3 border-pink-300"
                 >
                   <div className="relative z-10">
-                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4">
-                      <div className="absolute inset-0 overflow-hidden">
-                        <Image
-                          src="/images/ducks.png"
-                          alt="Girl Duck"
-                          width={512}
-                          height={256}
-                          className="object-cover"
-                          style={{ 
-                            width: '200%',
-                            height: '100%',
-                            objectPosition: 'right center',
-                            maxWidth: 'none'
-                          }}
-                        />
-                      </div>
+                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 overflow-hidden">
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage: 'url(/images/ducks.png)',
+                          backgroundSize: '200% 100%',
+                          backgroundPosition: 'right center',
+                          backgroundRepeat: 'no-repeat'
+                        }}
+                      />
                     </div>
                     <div className="text-2xl sm:text-3xl font-bold text-pink-600">
                       {t("guessing.girl")}
@@ -357,22 +352,6 @@ export default function UnifiedPrediction() {
               exit={{ opacity: 0, y: -20 }}
               className="text-center max-w-4xl w-full px-4"
             >
-              <button
-                onClick={handleBack}
-                className="absolute top-4 left-4 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <svg
-                  className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 19l-7-7 7-7"></path>
-                </svg>
-              </button>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C5282] mb-8">
                 {t("prediction.zodiac.title")}
               </h3>
@@ -414,22 +393,6 @@ export default function UnifiedPrediction() {
               exit={{ opacity: 0, y: -20 }}
               className="text-center max-w-3xl w-full px-4"
             >
-              <button
-                onClick={handleBack}
-                className="absolute top-4 left-4 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <svg
-                  className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 19l-7-7 7-7"></path>
-                </svg>
-              </button>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C5282] mb-8">
                 {t("prediction.nameSuggestion.title")}
               </h3>
@@ -481,22 +444,6 @@ export default function UnifiedPrediction() {
               exit={{ opacity: 0, y: -20 }}
               className="text-center max-w-3xl w-full px-4"
             >
-              <button
-                onClick={handleBack}
-                className="absolute top-4 left-4 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <svg
-                  className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 19l-7-7 7-7"></path>
-                </svg>
-              </button>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C5282] mb-8">
                 {t("prediction.wishes.title")}
               </h3>
@@ -536,22 +483,6 @@ export default function UnifiedPrediction() {
               exit={{ opacity: 0, scale: 0.9 }}
               className="text-center max-w-3xl w-full px-4"
             >
-              <button
-                onClick={handleBack}
-                className="absolute top-4 left-4 p-2 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <svg
-                  className="w-6 h-6 text-[#2C5282] group-hover:text-[#1e3a5f]"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M15 19l-7-7 7-7"></path>
-                </svg>
-              </button>
               {!isSubmitted ? (
                 <>
                   <div className="mb-8">

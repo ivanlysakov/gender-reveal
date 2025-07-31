@@ -1,24 +1,22 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-// Get all guesses for the party
+// Get all guesses
 export const getGuesses = query({
-  args: { partyId: v.id("party") },
-  handler: async (ctx, args) => {
+  args: {},
+  handler: async (ctx) => {
     return await ctx.db
       .query("guesses")
-      .withIndex("by_party", (q) => q.eq("partyId", args.partyId))
       .collect();
   },
 });
 
 // Get guess statistics
 export const getGuessStats = query({
-  args: { partyId: v.id("party") },
-  handler: async (ctx, args) => {
+  args: {},
+  handler: async (ctx) => {
     const guesses = await ctx.db
       .query("guesses")
-      .withIndex("by_party", (q) => q.eq("partyId", args.partyId))
       .collect();
 
     const boyGuesses = guesses.filter((g) => g.guess === "boy").length;
@@ -43,7 +41,6 @@ export const getGuessStats = query({
 // Submit a guess
 export const submitGuess = mutation({
   args: {
-    partyId: v.id("party"),
     name: v.string(),
     email: v.optional(v.string()),
     guess: v.union(v.literal("boy"), v.literal("girl")),
@@ -56,7 +53,6 @@ export const submitGuess = mutation({
     // Check if this person already guessed
     const existingGuess = await ctx.db
       .query("guesses")
-      .withIndex("by_party", (q) => q.eq("partyId", args.partyId))
       .filter((q) => q.eq(q.field("name"), args.name))
       .first();
 

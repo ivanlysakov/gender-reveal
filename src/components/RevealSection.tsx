@@ -1,7 +1,9 @@
 "use client";
 
+import { useQuery } from "convex/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { api } from "../../convex/_generated/api";
 import CountdownTimer from "./CountdownTimer";
 
 interface RevealSectionProps {
@@ -17,7 +19,11 @@ export default function RevealSection({
   const [actualGender, setActualGender] = useState<"boy" | "girl" | null>(null);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  // Mock data - will be replaced with Convex data
+  // Get real-time statistics from Convex
+  const guessStats = useQuery(api.guesses.getGuessStats);
+
+  // For now, we'll manage reveal state locally
+  // In production, this would come from an admin panel
   const [partyData] = useState({
     isRevealed: false, // Set to true to see the revealed state
     actualGender: "girl" as "boy" | "girl" | null, // The actual gender
@@ -253,10 +259,13 @@ export default function RevealSection({
                       {t("teamBoy")}
                     </div>
                     <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-blue-600 mb-2">
-                      12
+                      {guessStats?.boy.count || 0}
                     </div>
-                    <div className="text-base sm:text-lg text-blue-500 mb-3 sm:mb-4">
+                    <div className="text-base sm:text-lg text-blue-500 mb-1">
                       {t("predictions")}
+                    </div>
+                    <div className="text-sm text-blue-400">
+                      ({guessStats?.boy.percentage.toFixed(0) || 0}%)
                     </div>
                     {actualGender === "boy" && (
                       <div className="text-blue-600 font-bold text-xl animate-bounce">
@@ -275,15 +284,20 @@ export default function RevealSection({
                         : "bg-gradient-to-br from-gray-100 to-slate-100 border-2 border-gray-200"
                     }`}
                   >
-                    <div className="text-6xl mb-4">👧</div>
-                    <div className="text-2xl font-black text-pink-600 mb-4">
+                    <div className="text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">
+                      👧
+                    </div>
+                    <div className="text-xl sm:text-2xl font-black text-pink-600 mb-3 sm:mb-4">
                       {t("teamGirl")}
                     </div>
-                    <div className="text-5xl font-black text-pink-600 mb-2">
-                      8
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-pink-600 mb-2">
+                      {guessStats?.girl.count || 0}
                     </div>
-                    <div className="text-lg text-pink-500 mb-4">
+                    <div className="text-base sm:text-lg text-pink-500 mb-1">
                       {t("predictions")}
+                    </div>
+                    <div className="text-sm text-pink-400">
+                      ({guessStats?.girl.percentage.toFixed(0) || 0}%)
                     </div>
                     {actualGender === "girl" && (
                       <div className="text-pink-600 font-bold text-xl animate-bounce">
@@ -302,8 +316,11 @@ export default function RevealSection({
                     <span className="animate-bounce delay-200">🏆</span>
                     <span className="animate-bounce delay-400">🥳</span>
                   </div>
-                  <p className="text-xl text-gray-700 font-medium">
+                  <p className="text-xl text-gray-700 font-medium mb-2">
                     {t("congratsToWinners")}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {tGuessing("totalVotes")}: {guessStats?.total || 0}
                   </p>
                 </div>
               </div>
@@ -349,12 +366,12 @@ export default function RevealSection({
                     href="https://rewish.io/YhwCAA/wishes?access_code=y84icHOlj_3ajP"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
                   >
-                    <span className="text-2xl">🎁</span>
-                    <span className="text-lg">{t("giftButton")}</span>
+                    <span className="text-lg sm:text-xl lg:text-2xl">🎁</span>
+                    <span>{t("giftButton")}</span>
                     <svg
-                      className="w-5 h-5"
+                      className="w-4 h-4 sm:w-5 sm:h-5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -406,19 +423,15 @@ export default function RevealSection({
             <div className="text-6xl sm:text-7xl lg:text-8xl mb-4 sm:mb-8 animate-bounce">
               🎁
             </div>
-
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-4 sm:mb-8">
               {t("bigRevealTitle2")}
             </h2>
-
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mb-6 sm:mb-12 leading-relaxed px-4">
               {t("waitingForMoment")}
             </p>
-
             <div className="mb-6 sm:mb-12">
               <CountdownTimer />
             </div>
-
             <div className="mb-12">
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-8 px-4">
                 {t("stayTuned")}
@@ -429,7 +442,6 @@ export default function RevealSection({
                 <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
               </div>
             </div>
-
             {/* Demo button - enhanced design
             <div className="border-t border-gray-200 pt-6 sm:pt-12">
               <p className="text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-6">
