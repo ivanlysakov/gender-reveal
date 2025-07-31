@@ -63,11 +63,15 @@ export default function SimpleGallery() {
     setImageLoaded(false);
   }, [currentIndex]);
 
-  // Handle escape key
+  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isFullscreen) {
         setIsFullscreen(false);
+      } else if (e.key === "ArrowLeft") {
+        handlePrev();
+      } else if (e.key === "ArrowRight") {
+        handleNext();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -119,6 +123,15 @@ export default function SimpleGallery() {
             </div>
           )}
         </div>
+
+        {/* Caption */}
+        {photos[currentIndex].caption && (
+          <div className="text-center mt-4">
+            <p className="text-lg text-[#4A9B9B] font-medium">
+              {photos[currentIndex].caption}
+            </p>
+          </div>
+        )}
 
         {/* Gallery Navigation */}
         <div className="flex justify-center items-center gap-4 mt-6">
@@ -260,6 +273,44 @@ export default function SimpleGallery() {
                 </div>
               )}
             </div>
+
+            {/* Navigation arrows in fullscreen */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
+              aria-label="Previous photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
+              aria-label="Next photo"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Caption in fullscreen */}
+            {photos[currentIndex].caption && (
+              <div className="absolute bottom-20 left-0 right-0 flex justify-center z-20">
+                <div className="bg-black/50 backdrop-blur-sm px-6 py-3 rounded-full">
+                  <p className="text-white text-lg font-medium">
+                    {photos[currentIndex].caption}
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Bottom Navigation - positioned absolutely */}
             <div className="absolute left-0 right-0 bottom-8 flex justify-center items-center gap-4 z-20">
