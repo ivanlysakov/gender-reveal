@@ -13,6 +13,7 @@
     "framer-motion": "^11.18.2",
     "next": "15.4.3",
     "next-intl": "^4.3.4",
+    "popmotion": "^11.0.5",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

@@ -1,0 +1,78 @@
+/* Critical fixes for carousel navigation buttons */
+
+/* Ensure buttons are always visible and clickable */
+.carousel-nav-button {
+  position: absolute !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation !important;
+}
+
+/* Fix transform issues on mobile */
+@media (max-width: 768px) {
+  .carousel-nav-button {
+    transform: translateY(-50%) !important;
+  }
+  
+  .carousel-nav-button:hover {
+    transform: translateY(-50%) !important;
+  }
+  
+  .carousel-nav-button:active {
+    transform: translateY(-50%) scale(0.95) !important;
+  }
+}
+
+/* Ensure z-index hierarchy */
+.relative.aspect-\\[16\\/10\\] {
+  position: relative;
+  z-index: 1;
+}
+
+
+.carousel-nav-button {
+  z-index: 30 !important;
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .carousel-nav-button {
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+/* Ensure SVG icons are visible */
+.carousel-nav-button svg {
+  pointer-events: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+  color: currentColor;
+}
+
+/* High specificity override for any conflicting styles */
+div.relative button.carousel-nav-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Ensure buttons work on all touch devices */
+@media (pointer: coarse) {
+  .carousel-nav-button {
+    min-width: 48px !important;
+    min-height: 48px !important;
+  }
+}

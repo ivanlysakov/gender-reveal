@@ -1,0 +1,160 @@
+/* Mobile-specific styles for Photo Carousel */
+
+/* Enhance touch interaction on mobile */
+@media (max-width: 768px) {
+  /* Make the carousel more touch-friendly */
+  .carousel-nav-button {
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    position: absolute !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Ensure SVG icons are visible */
+  .carousel-nav-button svg {
+    width: 24px !important;
+    height: 24px !important;
+    display: block !important;
+  }
+
+  /* Better tap feedback */
+  .carousel-nav-button:active {
+    transform: scale(0.95) translateY(-50%) !important;
+    background: rgba(255, 255, 255, 1) !important;
+  }
+
+  /* Ensure full clickable area */
+  .cursor-pointer {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+
+  /* Caption readability */
+  .absolute.bottom-0 p {
+    font-size: 0.875rem !important;
+    padding: 0.5rem !important;
+  }
+
+}
+
+/* Swipe gesture hints */
+@media (max-width: 640px) {
+  /* Add swipe hint animation on first load */
+  @keyframes swipe-hint {
+    0% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    20% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(-30px);
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+  }
+
+  .cursor-pointer::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    animation: swipe-hint 3s ease-out 1s;
+  }
+}
+
+/* Fullscreen video controls */
+@media (max-width: 768px) {
+  video::-webkit-media-controls-panel {
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  }
+
+  video::-webkit-media-controls-play-button {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Improve image loading experience */
+.object-contain {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Smooth transitions */
+@media (max-width: 768px) {
+  .animate-presence-crossfade {
+    transition: opacity 0.2s ease-in-out !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (max-width: 768px) {
+  /* Larger touch targets for dots */
+  .carousel-dots button {
+    padding: 8px;
+    margin: -8px;
+  }
+
+  /* Focus indicators */
+  button:focus-visible {
+    outline: 3px solid #FFD93D;
+    outline-offset: 2px;
+  }
+}
+
+/* Prevent layout shift on image load */
+.aspect-\\[16\\/10\\] {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+
+  /* Better video controls */
+  video {
+    -webkit-media-controls-start-playback-button: none;
+  }
+}
+
+/* Android specific optimizations */
+@media (max-width: 768px) and (pointer: coarse) {
+  /* Optimize for touch */
+  .cursor-pointer {
+    cursor: default;
+  }
+
+  /* Smoother animations */
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+
+  /* Optimize animations */
+  .motion-reduce * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,253 @@
+/* Mobile-first responsive design improvements */
+
+/* Base mobile styles */
+@media (max-width: 640px) {
+  /* Typography adjustments */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  p, .text-base {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Section padding optimization */
+  section {
+    padding: 2rem 1rem !important;
+  }
+
+  /* Card and container adjustments */
+  .premium-card {
+    padding: 1.5rem !important;
+    margin: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  /* Button optimization for touch */
+  button, .premium-button, a[role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Form elements */
+  input, textarea, select {
+    min-height: 48px;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 0.75rem 1rem;
+  }
+
+  /* Language switcher mobile position */
+  .fixed.top-6.right-6 {
+    top: 1rem !important;
+    right: 1rem !important;
+  }
+
+  /* Photo carousel mobile optimization */
+  .carousel-container {
+    padding: 0 !important;
+  }
+
+  /* Duck mascot mobile size */
+  .duck-mascot {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  /* Countdown timer mobile layout */
+  .countdown-timer {
+    gap: 0.5rem !important;
+  }
+
+  .countdown-timer > div {
+    padding: 0.75rem !important;
+    min-width: 70px;
+  }
+
+  /* Modal and overlay adjustments */
+  .modal, .overlay {
+    padding: 1rem !important;
+  }
+
+  /* Confetti and animations performance */
+  .confetti-container {
+    display: none; /* Disable heavy animations on mobile */
+  }
+
+  /* Floating elements optimization */
+  .float-animation {
+    animation: none !important;
+  }
+
+  /* RSVP form mobile layout */
+  .rsvp-form {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Prediction cards mobile grid */
+  .prediction-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Reveal section mobile optimization */
+  .reveal-container {
+    padding: 1.5rem !important;
+  }
+
+  /* Footer mobile layout */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem !important;
+  }
+
+  /* Horizontal scrolling prevention */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  main {
+    overflow-x: hidden !important;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Section padding */
+  section {
+    padding: 3rem 2rem !important;
+  }
+
+  /* Grid layouts */
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  }
+
+  /* Button sizes */
+  button, .premium-button {
+    min-height: 44px;
+    padding: 0.75rem 2rem;
+  }
+}
+
+/* Touch-friendly hover states */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .premium-card:hover {
+    transform: none !important;
+  }
+
+  .premium-button:hover {
+    transform: none !important;
+  }
+
+  /* Add active states for better feedback */
+  .premium-button:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+
+  button:active, a[role="button"]:active {
+    opacity: 0.8;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical spacing */
+  section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Adjust hero section height */
+  .hero-section {
+    min-height: 80vh !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  button, .premium-button {
+    border: 2px solid currentColor !important;
+  }
+
+  .premium-card {
+    border: 2px solid var(--foreground) !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .float-animation,
+  .waddle-animation,
+  .pulse-animation,
+  .reveal-animation,
+  .gradient-animation,
+  .soap-bubble {
+    animation: none !important;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .fixed {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Improved touch targets */
+.clickable, [role="button"], a, button {
+  position: relative;
+}
+
+.clickable::before,
+[role="button"]::before,
+a::before,
+button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100%, 48px);
+  height: max(100%, 48px);
+  pointer-events: none;
+}
+
+/* Text selection on mobile */
+@media (max-width: 640px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: var(--primary-mint-light);
+    color: var(--foreground);
+  }
+}

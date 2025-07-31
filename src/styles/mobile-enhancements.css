@@ -1,0 +1,344 @@
+/* Mobile-specific UI enhancements */
+
+/* Fix for reveal section on mobile */
+@media (max-width: 640px) {
+  /* Reveal section specific fixes */
+  .countdown-timer {
+    gap: 0.5rem !important;
+  }
+
+  .countdown-timer-item {
+    padding: 0.75rem !important;
+    min-height: 80px;
+  }
+
+  .countdown-timer-item div:first-child {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+
+  .countdown-timer-item div:last-child {
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Reduce background bubble sizes on mobile */
+  .absolute.rounded-full[class*="blur-3xl"] {
+    transform: scale(0.5);
+  }
+
+  /* Better spacing for reveal content */
+  .text-center > .relative {
+    padding: 1rem !important;
+  }
+
+  /* Optimize reveal animations */
+  .animate-bounce {
+    animation-duration: 2s;
+  }
+
+  /* Reveal section specific mobile fixes */
+  .text-center .bg-white\\/90 {
+    padding: 1rem !important;
+  }
+
+  /* Hide decorative elements on mobile to reduce clutter */
+  .animate-ping {
+    display: none !important;
+  }
+
+  /* Smaller text sizes in reveal section */
+  h2, h3 {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+  }
+
+  /* Compact stats cards */
+  .grid.sm\\:grid-cols-2 > div {
+    padding: 1rem !important;
+  }
+
+  /* Reduce margin bottoms */
+  .mb-16 {
+    margin-bottom: 2rem !important;
+  }
+
+  .mb-10 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mb-8 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Simplify shadows on mobile */
+  .shadow-2xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .shadow-xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Remove hover effects on mobile */
+  .hover\\:scale-\\[1\\.02\\]:hover {
+    transform: none !important;
+  }
+
+  .hover\\:blur-\\[4rem\\]:hover,
+  .hover\\:blur-\\[5rem\\]:hover {
+    filter: none !important;
+  }
+}
+
+/* Enhanced touch targets for mobile */
+@media (max-width: 768px) {
+  /* Language Switcher mobile optimization */
+  .fixed.top-6.right-6 {
+    top: 0.75rem !important;
+    right: 0.75rem !important;
+  }
+  
+  /* Ensure all interactive elements meet minimum touch size */
+  button:not(.no-touch-enhance):not(.carousel-nav-button),
+  a:not(.no-touch-enhance),
+  [role="button"]:not(.no-touch-enhance),
+  input[type="button"]:not(.no-touch-enhance),
+  input[type="submit"]:not(.no-touch-enhance) {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Photo carousel mobile controls */
+  .carousel-nav-button {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    z-index: 20 !important;
+  }
+
+  /* Disable hover scale on mobile to prevent button issues */
+  .carousel-nav-button:hover {
+    transform: translateY(-50%) !important;
+  }
+
+  /* Mobile prediction form */
+  .prediction-input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 1rem 1.5rem !important;
+    border-radius: 2rem !important;
+  }
+
+  /* Gender selection cards mobile */
+  .gender-select-card {
+    padding: 1.5rem !important;
+    margin: 0.5rem;
+  }
+
+  /* Mobile dropdown enhancements */
+  .dropdown-menu {
+    min-width: 200px !important;
+    font-size: 16px !important;
+  }
+
+  /* RSVP form mobile layout */
+  .rsvp-form input,
+  .rsvp-form select,
+  .rsvp-form textarea {
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Mobile photo gallery */
+  .photo-gallery-item {
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Countdown timer mobile */
+  .countdown-timer {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .countdown-timer-item {
+    padding: 1rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* Mobile reveal animation */
+  .reveal-animation {
+    animation-duration: 0.4s !important;
+  }
+
+  /* Mobile-optimized confetti */
+  .confetti-piece {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  /* Duck mascot mobile interactions */
+  .duck-mascot-container {
+    position: fixed !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+    width: 80px !important;
+    height: 80px !important;
+    z-index: 40 !important;
+  }
+
+  /* Mobile scroll indicators */
+  .scroll-indicator {
+    bottom: 2rem !important;
+    animation: bounce-gentle 2s infinite !important;
+  }
+
+  /* Mobile section spacing */
+  .hero-section {
+    padding-top: 4rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  /* Mobile card spacing */
+  .card-grid {
+    gap: 1rem !important;
+    padding: 0 0.5rem !important;
+  }
+
+  /* Mobile text sizing */
+  .mobile-text-adjust {
+    font-size: clamp(0.875rem, 2.5vw, 1rem) !important;
+  }
+
+  /* Mobile heading sizing */
+  .mobile-heading-adjust {
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+  }
+
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Mobile navigation dots */
+  .carousel-dots {
+    padding: 0.5rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .carousel-dot {
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
+/* Improved tap highlights */
+@media (hover: none) {
+  button:active,
+  a:active,
+  [role="button"]:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent tap delay */
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Fix iOS form zoom */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* iOS safe area handling */
+  .fixed-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Android-specific optimizations */
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  /* High DPI optimizations */
+  .premium-card {
+    will-change: transform;
+  }
+}
+
+/* Landscape mobile specific */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto !important;
+    padding: 2rem 1rem !important;
+  }
+
+  .modal-content {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Accessibility improvements for mobile */
+@media (max-width: 768px) {
+  /* Focus visible styles */
+  *:focus-visible {
+    outline: 3px solid var(--primary-orange);
+    outline-offset: 2px;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-orange);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+  }
+
+  .skip-to-content:focus {
+    top: 0;
+  }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+  /* Disable expensive effects on mobile */
+  .parallax-effect {
+    transform: none !important;
+  }
+
+  /* Reduce animation complexity */
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Optimize images */
+  img {
+    will-change: auto !important;
+  }
+}

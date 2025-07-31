@@ -13,16 +13,21 @@
     "message3": "Join our waddle of excitement! Make your guess, discover their zodiac sign, and help us celebrate this amazing journey!",
     "signature": "With love and quacks,",
     "names": "Olha & Ivan 🦆",
-    "ctaButton": "Reveal the Surprise!"
+    "ctaButton": "Reveal the Surprise!",
+    "loveSender": "With love and quacks, Olha & Ivan 🦆"
   },
   "countdown": {
     "title": "Countdown to the Big Reveal!",
+    "sectionTitle": "The Countdown Begins",
+    "sectionSubtitle": "Every second brings us closer to our special moment",
     "days": "Days",
     "hours": "Hours",
     "minutes": "Minutes",
     "seconds": "Seconds",
     "revealDate": "August 10th, 2025 at 3:00 PM",
-    "revealSubtitle": "The most exciting surprise! 🎆"
+    "revealSubtitle": "The most exciting surprise! 🎆",
+    "started": "Started",
+    "reveal": "Reveal"
   },
   "guessing": {
     "sectionTitle": "What Will It Be?",
@@ -85,12 +90,12 @@
     "pregnancyJourney": "Pregnancy Journey",
     "ultrasounds": "Ultrasounds",
     "preparations": "Preparations",
-    "photo1Caption": "First announcement photo! 📸",
-    "photo2Caption": "Our little one at 12 weeks 👶",
-    "photo3Caption": "Baby bump at 20 weeks! 🤰",
-    "photo3DCaption": "3D ultrasound - so precious! 💕",
-    "photo4Caption": "Getting ready for baby! 🍼",
-    "photo5Caption": "Maternity photoshoot ✨",
+    "photo1Caption": "Our first video! 📸",
+    "photo2Caption": "Our baby at 10 weeks 👶",
+    "photo3Caption": "Ultrasound at 18 weeks! 🤰",
+    "photo3DCaption": "Getting ready for baby! 💕",
+    "photo4Caption": "Growing little by little 🍼",
+    "photo5Caption": "Already enjoying as a family of three ✨",
     "galleryPhoto": "Gallery photo",
     "noPhotosYet": "No photos yet",
     "checkBackSoon": "Check back soon for more beautiful memories!"
@@ -114,8 +119,8 @@
     "revealDate": "December 31st, 2024 at 3:00 PM",
     "newYearSurprise": "The most exciting New Year's Eve surprise! 🎆",
     "stayTuned": "Stay tuned - this page will update with the big news!",
-    "demoText": "Demo: Click to see the reveal animation",
-    "revealNowDemo": "Reveal Now (Demo)",
+    "demoText": "Click to see who guessed correctly!",
+    "revealNowDemo": "Reveal Now",
     "withAllOurLove": "With all our love,",
     "olhaAndIvan": "Olha & Ivan 💕",
     "canShareJoyWith": "We can't wait to introduce our little {gender} to all of you when {pronoun} arrives!",
@@ -125,12 +130,23 @@
     "girl": "girl",
     "drumRoll": "Drum roll please...",
     "itsOfficial": "It's Official!",
+    "giftMessage": "If you'd like to help us prepare for our little one's arrival",
+    "giftButton": "View Baby Registry",
     "teamBoy": "Team Boy",
     "teamGirl": "Team Girl",
     "predictions": "predictions",
     "winners": "WINNERS!",
     "congratsToWinners": "Congratulations to everyone who guessed correctly!",
     "thankYou": "Thank You!"
+  },
+  "event": {
+    "title": "Join Our Celebration",
+    "dateTitle": "When",
+    "date": "August 10th, 2025",
+    "timeTitle": "Time",
+    "time": "3:00 PM",
+    "locationTitle": "Where",
+    "location": "Virtual Celebration"
   },
   "footer": {
     "madeWith": "Made with love for our little miracle",
@@ -163,8 +179,28 @@
     "pisces": "Pisces"
   },
   "prediction": {
+    "sectionTitle": "Make Your Prediction",
+    "sectionSubtitle": "What does your heart tell you?",
     "title": "Make Your Prediction",
     "subtitle": "Follow the magical steps to discover what the future holds!",
+    "mainQuestion": "Boy or Girl?",
+    "statsHint": "Join others who have already made their prediction!",
+    "yourGuess": "Your Guess",
+    "nameLabel": "What's your name?",
+    "namePlaceholder": "Enter your name",
+    "submitButton": "Submit Prediction",
+    "submitting": "Submitting...",
+    "changeGuess": "Change",
+    "success": {
+      "title": "Thank You!",
+      "message": "{name}, your prediction has been recorded!"
+    },
+    "alreadyPredicted": {
+      "title": "You've Already Made Your Prediction!",
+      "message": "Thank you {name}, your prediction has been saved.",
+      "yourPrediction": "Your prediction:",
+      "waitForReveal": "Now we wait for the big reveal! 🎉"
+    },
     "welcome": {
       "title": "Welcome to the Prediction Portal",
       "description": "Let's combine the wisdom of the stars with your intuition to make the perfect prediction!",

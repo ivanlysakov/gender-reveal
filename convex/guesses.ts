@@ -47,6 +47,9 @@ export const submitGuess = mutation({
     name: v.string(),
     email: v.optional(v.string()),
     guess: v.union(v.literal("boy"), v.literal("girl")),
+    zodiacSign: v.optional(v.union(v.literal("sagittarius"), v.literal("capricorn"))),
+    suggestedName: v.optional(v.string()),
+    wishes: v.optional(v.string()),
     message: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
@@ -61,6 +64,9 @@ export const submitGuess = mutation({
       // Update existing guess
       return await ctx.db.patch(existingGuess._id, {
         guess: args.guess,
+        zodiacSign: args.zodiacSign,
+        suggestedName: args.suggestedName,
+        wishes: args.wishes,
         message: args.message,
       });
     } else {

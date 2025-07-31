@@ -1,0 +1,157 @@
+/* Fullscreen Gallery Styles - iPhone Style */
+
+/* Ensure fullscreen overlay displays correctly */
+.fixed.inset-0 {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important; /* Dynamic viewport height for mobile */
+}
+
+/* Prevent any z-index issues */
+.fixed.inset-0.bg-black {
+  z-index: 99999 !important;
+  background-color: #000000 !important;
+}
+
+/* Ensure fullscreen gallery is above all other content */
+.z-\[9999\] {
+  z-index: 99999 !important;
+}
+
+/* Reset padding for main container but allow for UI elements */
+.fixed.inset-0 > div:first-child {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure images take full available space */
+.fixed.inset-0 img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Ensure proper touch handling on mobile */
+@media (max-width: 768px) {
+  /* Fullscreen gallery touch optimization */
+  .fixed.inset-0 {
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Allow touch on interactive elements */
+  .fixed.inset-0 button,
+  .fixed.inset-0 video {
+    touch-action: auto;
+  }
+
+  /* UI overlay positioning */
+  .absolute.inset-0.pointer-events-none {
+    position: absolute !important;
+    z-index: 10 !important;
+  }
+
+  /* Optimize image/video container */
+  .flex-1.flex.items-center {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Ensure images and videos fill space correctly */
+  .fixed.inset-0 img,
+  .fixed.inset-0 video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain !important;
+  }
+
+  /* Navigation buttons positioning */
+  .fixed.inset-0 button[aria-label*="Previous"],
+  .fixed.inset-0 button[aria-label*="Next"] {
+    position: absolute !important;
+    z-index: 5 !important;
+  }
+
+  /* Caption positioning */
+  .fixed.inset-0 .absolute.bottom-0 {
+    position: absolute !important;
+    z-index: 5 !important;
+  }
+
+  /* Dots indicator positioning */
+  .fixed.inset-0 .absolute.bottom-20 {
+    position: absolute !important;
+    z-index: 5 !important;
+    bottom: 5rem !important;
+  }
+}
+
+/* Swipe gesture area */
+.flex-1.flex.items-center {
+  cursor: grab;
+}
+
+.flex-1.flex.items-center:active {
+  cursor: grabbing;
+}
+
+/* iPhone-style minimal UI */
+.fixed.inset-0 button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide UI elements that might add margins */
+.fixed.inset-0 .absolute.top-0 {
+  background: none !important;
+}
+
+/* Ensure true edge-to-edge display */
+@media (max-width: 768px) {
+  .fixed.inset-0 {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Navigation tap areas */
+  .absolute.left-0.top-0.bottom-0,
+  .absolute.right-0.top-0.bottom-0 {
+    background: transparent !important;
+    cursor: pointer;
+  }
+}
+
+/* Prevent body scroll when fullscreen is open */
+body.fullscreen-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .fixed.inset-0 {
+    height: -webkit-fill-available !important;
+  }
+}
+
+/* Accessibility improvements */
+.fixed.inset-0 button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+  .fixed.inset-0 * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
