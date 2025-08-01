@@ -309,7 +309,7 @@ export default function UnifiedPrediction() {
                       <div
                         className="absolute inset-0 "
                         style={{
-                          backgroundImage: "url(/images/boy.png)",
+                          backgroundImage: "url(/images/Boy.png)",
                           backgroundSize: "contain",
                           backgroundPosition: "center center",
                           backgroundRepeat: "no-repeat",
@@ -334,7 +334,7 @@ export default function UnifiedPrediction() {
                       <div
                         className="absolute inset-0"
                         style={{
-                          backgroundImage: "url(/images/girl.png)",
+                          backgroundImage: "url(/images/Girl.png)",
                           backgroundSize: "contain",
 
                           backgroundRepeat: "no-repeat",
