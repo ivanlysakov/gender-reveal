@@ -1,10 +1,10 @@
 "use client";
 
+import { useMutation } from "convex/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 type Step =
@@ -74,13 +74,17 @@ export default function UnifiedPrediction() {
   };
 
   const handleSubmit = async () => {
-    console.log("Submit clicked", { predictionData, isSubmitted, hasAlreadyPredicted });
-    
+    console.log("Submit clicked", {
+      predictionData,
+      isSubmitted,
+      hasAlreadyPredicted,
+    });
+
     if (!predictionData.name || !predictionData.genderGuess) {
       console.log("Missing name or gender guess");
       return;
     }
-    
+
     if (isSubmitted || hasAlreadyPredicted) {
       console.log("Already submitted or predicted");
       return;
@@ -92,7 +96,10 @@ export default function UnifiedPrediction() {
       await submitGuess({
         name: predictionData.name,
         guess: predictionData.genderGuess,
-        zodiacSign: predictionData.zodiacSign as "sagittarius" | "capricorn" | undefined,
+        zodiacSign: predictionData.zodiacSign as
+          | "sagittarius"
+          | "capricorn"
+          | undefined,
         suggestedName: predictionData.suggestedName,
         wishes: predictionData.wishes,
       });
@@ -232,7 +239,7 @@ export default function UnifiedPrediction() {
           </svg>
         </button>
       )}
-      
+
       <div className="min-h-[500px] flex items-center justify-center relative">
         <AnimatePresence mode="wait">
           {/* Welcome Step */}
@@ -299,13 +306,13 @@ export default function UnifiedPrediction() {
                 >
                   <div className="relative z-10">
                     <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 overflow-hidden">
-                      <div 
-                        className="absolute inset-0"
+                      <div
+                        className="absolute inset-0 "
                         style={{
-                          backgroundImage: 'url(/images/ducks.png)',
-                          backgroundSize: '200% 100%',
-                          backgroundPosition: 'left center',
-                          backgroundRepeat: 'no-repeat'
+                          backgroundImage: "url(/images/boy.png)",
+                          backgroundSize: "contain",
+                          backgroundPosition: "center center",
+                          backgroundRepeat: "no-repeat",
                         }}
                       />
                     </div>
@@ -324,13 +331,13 @@ export default function UnifiedPrediction() {
                 >
                   <div className="relative z-10">
                     <div className="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-4 overflow-hidden">
-                      <div 
+                      <div
                         className="absolute inset-0"
                         style={{
-                          backgroundImage: 'url(/images/ducks.png)',
-                          backgroundSize: '200% 100%',
-                          backgroundPosition: 'right center',
-                          backgroundRepeat: 'no-repeat'
+                          backgroundImage: "url(/images/girl.png)",
+                          backgroundSize: "contain",
+
+                          backgroundRepeat: "no-repeat",
                         }}
                       />
                     </div>
@@ -355,6 +362,9 @@ export default function UnifiedPrediction() {
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C5282] mb-8">
                 {t("prediction.zodiac.title")}
               </h3>
+              <p className="text-lg text-[#4A9B9B] mb-8">
+                {t("prediction.zodiac.subtitle")}
+              </p>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8 max-w-xl mx-auto">
                 {zodiacSigns.map((sign) => (
@@ -489,7 +499,7 @@ export default function UnifiedPrediction() {
                     <div className="text-7xl mb-6">✨</div>
                     <h3 className="text-3xl sm:text-4xl font-bold text-[#2C5282] mb-6">
                       {t("prediction.result.title", {
-                        name: predictionData.name,
+                        name: predictionData.name || "",
                       })}
                     </h3>
 

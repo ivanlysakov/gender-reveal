@@ -357,35 +357,6 @@ export default function RevealSection({
                   })}
                 </p>
 
-                {/* Gift Button Section */}
-                <div className="mb-8">
-                  <p className="text-lg md:text-xl text-gray-600 mb-6">
-                    {t("giftMessage")}
-                  </p>
-                  <a
-                    href="https://rewish.io/YhwCAA/wishes?access_code=y84icHOlj_3ajP"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
-                  >
-                    <span className="text-lg sm:text-xl lg:text-2xl">🎁</span>
-                    <span>{t("giftButton")}</span>
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
-                </div>
-
                 <div className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-8 mb-8 border border-gray-200">
                   <p className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
                     {t("withAllOurLove")}
@@ -432,16 +403,50 @@ export default function RevealSection({
             <div className="mb-6 sm:mb-12">
               <CountdownTimer />
             </div>
-            <div className="mb-12">
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-8 px-4">
-                {t("stayTuned")}
+            <div className="flex justify-center gap-3 mb-6">
+              <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
+              <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse delay-200"></div>
+              <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
+            </div>
+            {/* Gift Button Section */}
+            <div className="mb-8">
+              <p className="text-lg md:text-xl text-gray-600 mb-6">
+                {t("giftMessage")}
               </p>
+              <a
+                href="https://rewish.io/YhwCAA/wishes?access_code=y84icHOlj_3ajP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
+              >
+                <span className="text-lg sm:text-xl lg:text-2xl">🎁</span>
+                <span>{t("giftButton")}</span>
+                <svg
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div className="m-12">
               <div className="flex justify-center gap-3">
                 <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
                 <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse delay-200"></div>
                 <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
               </div>
             </div>
+
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-8 px-4">
+              {t("stayTuned")}
+            </p>
             {/* Demo button - enhanced design
             <div className="border-t border-gray-200 pt-6 sm:pt-12">
               <p className="text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-6">

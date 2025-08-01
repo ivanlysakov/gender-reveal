@@ -1,8 +1,9 @@
 "use client";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function SimpleGallery() {
   const t = useTranslations("gallery");
@@ -14,15 +15,15 @@ export default function SimpleGallery() {
   const photos = [
     {
       id: "1",
-      url: "/images/gallery/1.mp4",
-      type: "video" as const,
-      caption: t("photo1Caption"),
-    },
-    {
-      id: "2",
       url: "/images/gallery/2.jpg",
       type: "image" as const,
       caption: t("photo2Caption"),
+    },
+    {
+      id: "2",
+      url: "/images/gallery/1.mp4",
+      type: "video" as const,
+      caption: t("photo1Caption"),
     },
     {
       id: "3",
@@ -50,13 +51,13 @@ export default function SimpleGallery() {
     },
   ];
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : photos.length - 1));
-  };
+  }, [photos.length]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev < photos.length - 1 ? prev + 1 : 0));
-  };
+  }, [photos.length]);
 
   // Reset image loaded state when changing images
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function SimpleGallery() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFullscreen]);
+  }, [handleNext, handlePrev, isFullscreen]);
 
   return (
     <>
@@ -106,9 +107,12 @@ export default function SimpleGallery() {
           ) : (
             <div className="relative w-full h-full flex items-center justify-center">
               <video
+                key={photos[currentIndex].url}
                 className="w-full h-full object-contain"
                 controls
                 muted
+                autoPlay
+                loop
                 playsInline
               >
                 <source
@@ -138,49 +142,37 @@ export default function SimpleGallery() {
           {/* Previous button */}
           <button
             onClick={handlePrev}
-            className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-800 hover:bg-white shadow-lg transition-all"
+            className=" rounded-lg flex items-center justify-center shadow-lg transition-all !p-1 "
             aria-label="Previous photo"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+            <ChevronLeft />
           </button>
 
           {/* Dots */}
-          <div className="flex gap-2">
+          <div className="flex  justify-center">
             {photos.map((photo, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`transition-all duration-300 ${
+                className={`transition-all duration-300 !p-1  ${
                   index === currentIndex ? "scale-110" : "hover:scale-105"
                 }`}
                 aria-label={`Go to ${photo.type === "video" ? "video" : "photo"} ${index + 1}`}
               >
                 {photo.type === "video" ? (
                   <div
-                    className={`w-4 h-4 rounded-full flex items-center justify-center ${
+                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full flex items-center justify-center ${
                       index === currentIndex ? "bg-pink-400" : "bg-gray-300"
                     }`}
                   >
-                    <div className="w-0 h-0 border-l-[5px] border-l-white border-y-[3px] border-y-transparent ml-0.5" />
+                    <div className="w-0 h-0 border-l-[4px] sm:border-l-[5px] border-l-white border-y-[2.5px] sm:border-y-[3px] border-y-transparent ml-0.5" />
                   </div>
                 ) : (
                   <div
                     className={`transition-all duration-300 ${
                       index === currentIndex
-                        ? "bg-pink-400 w-8 h-3"
-                        : "bg-gray-300 w-3 h-3"
+                        ? "bg-pink-400 w-3 h-3 sm:w-8 sm:h-3"
+                        : "bg-gray-300 w-3 h-3 sm:w-3 sm:h-3"
                     } rounded-full`}
                   />
                 )}
@@ -191,22 +183,10 @@ export default function SimpleGallery() {
           {/* Next button */}
           <button
             onClick={handleNext}
-            className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-800 hover:bg-white shadow-lg transition-all"
+            className=" rounded-full flex items-center justify-center  shadow-lg transition-all !p-1"
             aria-label="Next photo"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <ChevronRight />
           </button>
         </div>
       </div>
@@ -256,9 +236,12 @@ export default function SimpleGallery() {
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <video
+                    key={photos[currentIndex].url}
                     className="max-w-full max-h-full"
                     controls
                     muted
+                    autoPlay
+                    loop
                     playsInline
                   >
                     <source
@@ -283,11 +266,21 @@ export default function SimpleGallery() {
               className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
               aria-label="Previous photo"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
-            
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -296,8 +289,18 @@ export default function SimpleGallery() {
               className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
               aria-label="Next photo"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
 

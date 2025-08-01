@@ -24,7 +24,7 @@
     "hours": "Hours",
     "minutes": "Minutes",
     "seconds": "Seconds",
-    "revealDate": "August 10th, 2025 at 3:00 PM",
+    "revealDate": "August 09th, 2025 at 3:00 PM",
     "revealSubtitle": "The most exciting surprise! 🎆",
     "started": "Started",
     "reveal": "Reveal"
@@ -133,7 +133,7 @@
     "girl": "girl",
     "drumRoll": "Drum roll please...",
     "itsOfficial": "It's Official!",
-    "giftMessage": "If you'd like to help us prepare for our little one's arrival",
+    "giftMessage": "We would be infinitely grateful if you would like to help us prepare for the arrival of our baby.",
     "giftButton": "View Baby Registry",
     "teamBoy": "Team Boy",
     "teamGirl": "Team Girl",
@@ -212,6 +212,7 @@
     },
     "zodiac": {
       "title": "Baby's Zodiac Sign",
+      "subtitle": "Previous due date: 14.12.25",
       "description": "What zodiac sign do you think the baby will have? Choose your prediction!"
     },
     "gender": {
