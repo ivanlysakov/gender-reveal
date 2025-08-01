@@ -140,7 +140,12 @@
     "predictions": "передбачень",
     "winners": "ПЕРЕМОЖЦІ!",
     "congratsToWinners": "Вітаємо всіх, хто вгадав правильно!",
-    "thankYou": "Дякуємо!"
+    "thankYou": "Дякуємо!",
+    "onlineTranslationTitle": "Дивіться наживо онлайн!",
+    "onlineTranslationSubtitle": "Онлайн трансляція почнеться під час розкриття",
+    "watchLiveButton": "Дивитися розкриття наживо",
+    "giftSectionTitle": "Допоможіть нам підготуватися до появи малюка",
+    "giftThankYou": "Дякуємо за вашу допомогу!"
   },
   "event": {
     "title": "Приєднуйтесь до святкування",

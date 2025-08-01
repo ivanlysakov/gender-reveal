@@ -403,44 +403,43 @@ export default function RevealSection({
             <div className="mb-6 sm:mb-12">
               <CountdownTimer />
             </div>
-            <div className="flex justify-center gap-3 mb-6">
+            <div className="flex justify-center gap-3 mb-8">
               <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
               <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse delay-200"></div>
               <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
             </div>
-            {/* Gift Button Section */}
-            <div className="mb-8">
-              <p className="text-lg md:text-xl text-gray-600 mb-6">
-                {t("giftMessage")}
+
+            {/* Online Translation Section */}
+            <div className="mb-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 sm:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 text-center">
+                {t("onlineTranslationTitle")}
+              </h3>
+              <p className="text-base sm:text-lg text-gray-600 mb-4 text-center">
+                {t("onlineTranslationSubtitle")}
               </p>
-              <a
-                href="https://rewish.io/YhwCAA/wishes?access_code=y84icHOlj_3ajP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
-              >
-                <span className="text-lg sm:text-xl lg:text-2xl">🎁</span>
-                <span>{t("giftButton")}</span>
-                <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="flex justify-center">
+                <a
+                  href="https://twitch.tv/nohoneynomoney_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
-            </div>
-            <div className="m-12">
-              <div className="flex justify-center gap-3">
-                <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
-                <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse delay-200"></div>
-                <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
+                  <span className="text-lg sm:text-xl lg:text-2xl">📺</span>
+                  <span>{t("watchLiveButton")}</span>
+                  <svg
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
 

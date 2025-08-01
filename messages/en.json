@@ -140,7 +140,12 @@
     "predictions": "predictions",
     "winners": "WINNERS!",
     "congratsToWinners": "Congratulations to everyone who guessed correctly!",
-    "thankYou": "Thank You!"
+    "thankYou": "Thank You!",
+    "onlineTranslationTitle": "Watch Live Online!",
+    "onlineTranslationSubtitle": "Online translation will start when the reveal begins",
+    "watchLiveButton": "Watch Reveal Live",
+    "giftSectionTitle": "Help Us Prepare for Baby",
+    "giftThankYou": "Your thoughtfulness and generosity mean the world to us!"
   },
   "event": {
     "title": "Join Our Celebration",

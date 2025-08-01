@@ -2,6 +2,7 @@
 
 import DuckMascot from "@/components/DuckMascot";
 import Footer from "@/components/Footer";
+import GiftSection from "@/components/GiftSection";
 import PartyConfetti from "@/components/PartyConfetti";
 import RevealSection from "@/components/RevealSection";
 import SimpleGallery from "@/components/SimpleGallery";
@@ -315,6 +316,9 @@ export default function Home() {
           <RevealSection onRevealComplete={handleRevealComplete} />
         </div>
       </section>
+
+      {/* Gift Section */}
+      <GiftSection />
 
       {/* Footer */}
       <Footer />
