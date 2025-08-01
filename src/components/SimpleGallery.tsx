@@ -10,6 +10,14 @@ export default function SimpleGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [videoRefs, setVideoRefs] = useState<{
+    [key: string]: HTMLVideoElement | null;
+  }>({});
+  const [videosPlaying, setVideosPlaying] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   // Gallery items
   const photos = [
@@ -59,10 +67,56 @@ export default function SimpleGallery() {
     setCurrentIndex((prev) => (prev < photos.length - 1 ? prev + 1 : 0));
   }, [photos.length]);
 
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      handleNext();
+    }
+    if (isRightSwipe) {
+      handlePrev();
+    }
+  };
+
   // Reset image loaded state when changing images
   useEffect(() => {
     setImageLoaded(false);
   }, [currentIndex]);
+
+  // Try to play video when index changes
+  useEffect(() => {
+    const currentPhoto = photos[currentIndex];
+    if (currentPhoto.type === "video") {
+      // Try to play with a small delay for iOS
+      const timeoutId = setTimeout(() => {
+        const video = videoRefs[currentPhoto.url];
+        if (video) {
+          video.play().catch((err) => {
+            console.log("Autoplay prevented:", err);
+            // Autoplay was prevented, user will need to click play
+          });
+        }
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentIndex]); // Remove videoRefs from dependencies to prevent infinite loop
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -83,12 +137,25 @@ export default function SimpleGallery() {
     <>
       {/* Main Gallery */}
       <div className="relative max-w-5xl mx-auto">
-        <div className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-2xl bg-white/20 backdrop-blur-sm shadow-2xl border border-white/30">
+        <div
+          className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-2xl bg-white/20 backdrop-blur-sm shadow-2xl border border-white/30"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {photos[currentIndex].type === "image" ? (
             <div
               className="relative w-full h-full cursor-pointer"
               onClick={() => setIsFullscreen(true)}
             >
+              {/* Click hint for mobile */}
+              <div className="absolute top-4 left-0 right-0 flex justify-center z-10 md:hidden">
+                <div className="bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm flex items-center gap-2">
+                  <span className="animate-pulse">👆</span>
+                  <span>Tap to view fullscreen</span>
+                  <span className="animate-pulse">👆</span>
+                </div>
+              </div>
               <Image
                 src={photos[currentIndex].url}
                 alt={photos[currentIndex].caption || ""}
@@ -106,7 +173,33 @@ export default function SimpleGallery() {
             </div>
           ) : (
             <div className="relative w-full h-full flex items-center justify-center">
+              {/* Play button overlay for iOS */}
+              {!videosPlaying[photos[currentIndex].url] && (
+                <button
+                  onClick={() => {
+                    const video = videoRefs[photos[currentIndex].url];
+                    if (video) {
+                      video.play();
+                      setVideosPlaying((prev) => ({
+                        ...prev,
+                        [photos[currentIndex].url]: true,
+                      }));
+                    }
+                  }}
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 md:hidden"
+                >
+                  <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-0 h-0 border-l-[25px] border-l-gray-800 border-y-[15px] border-y-transparent ml-2" />
+                  </div>
+                </button>
+              )}
               <video
+                ref={(el) => {
+                  if (el && !videoRefs[photos[currentIndex].url]) {
+                    // Only set ref if it doesn't exist to prevent re-renders
+                    videoRefs[photos[currentIndex].url] = el;
+                  }
+                }}
                 key={photos[currentIndex].url}
                 className="w-full h-full object-contain"
                 controls
@@ -114,6 +207,30 @@ export default function SimpleGallery() {
                 autoPlay
                 loop
                 playsInline
+                webkit-playsinline="true"
+                onPlay={() => {
+                  setVideosPlaying((prev) => {
+                    if (prev[photos[currentIndex].url] !== true) {
+                      return { ...prev, [photos[currentIndex].url]: true };
+                    }
+                    return prev;
+                  });
+                }}
+                onPause={() => {
+                  setVideosPlaying((prev) => {
+                    if (prev[photos[currentIndex].url] !== false) {
+                      return { ...prev, [photos[currentIndex].url]: false };
+                    }
+                    return prev;
+                  });
+                }}
+                onLoadedMetadata={(e) => {
+                  const video = e.currentTarget;
+                  // Try to play when metadata is loaded
+                  video.play().catch(() => {
+                    console.log("Autoplay prevented on iOS");
+                  });
+                }}
               >
                 <source
                   src={photos[currentIndex].url}
@@ -136,6 +253,8 @@ export default function SimpleGallery() {
             </p>
           </div>
         )}
+
+        {/* Swipe hint for mobile */}
 
         {/* Gallery Navigation */}
         <div className="flex justify-center items-center gap-4 mt-6">
@@ -214,7 +333,12 @@ export default function SimpleGallery() {
             </div>
 
             {/* Image Container - full screen */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
               {photos[currentIndex].type === "image" ? (
                 <div className="relative w-full h-full">
                   {!imageLoaded && (
@@ -236,6 +360,11 @@ export default function SimpleGallery() {
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <video
+                    ref={(el) => {
+                      if (el && !videoRefs[photos[currentIndex].url]) {
+                        videoRefs[photos[currentIndex].url] = el;
+                      }
+                    }}
                     key={photos[currentIndex].url}
                     className="max-w-full max-h-full"
                     controls
@@ -243,6 +372,29 @@ export default function SimpleGallery() {
                     autoPlay
                     loop
                     playsInline
+                    webkit-playsinline="true"
+                    onPlay={() => {
+                      setVideosPlaying((prev) => {
+                        if (prev[photos[currentIndex].url] !== true) {
+                          return { ...prev, [photos[currentIndex].url]: true };
+                        }
+                        return prev;
+                      });
+                    }}
+                    onPause={() => {
+                      setVideosPlaying((prev) => {
+                        if (prev[photos[currentIndex].url] !== false) {
+                          return { ...prev, [photos[currentIndex].url]: false };
+                        }
+                        return prev;
+                      });
+                    }}
+                    onLoadedMetadata={(e) => {
+                      const video = e.currentTarget;
+                      video.play().catch(() => {
+                        console.log("Autoplay prevented on iOS in fullscreen");
+                      });
+                    }}
                   >
                     <source
                       src={photos[currentIndex].url}
@@ -256,53 +408,6 @@ export default function SimpleGallery() {
                 </div>
               )}
             </div>
-
-            {/* Navigation arrows in fullscreen */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrev();
-              }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
-              aria-label="Previous photo"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all transform hover:scale-110 opacity-80 hover:opacity-100"
-              aria-label="Next photo"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
 
             {/* Caption in fullscreen */}
             {photos[currentIndex].caption && (
