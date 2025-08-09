@@ -33,7 +33,8 @@ export default function Home() {
   const t = useTranslations();
   const [duckClicks, setDuckClicks] = useState(0);
   const [showDuckDance, setShowDuckDance] = useState(false);
-  const [isRevealed, setIsRevealed] = useState(false);
+  // Always show as revealed since it's a boy
+  const [isRevealed, setIsRevealed] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [floatingBubbles, setFloatingBubbles] = useState<Bubble[]>([]);
@@ -167,10 +168,11 @@ export default function Home() {
       {/* Beautiful Soap Bubbles */}
       <SoapBubbles />
 
-      {/* Party Confetti */}
-      <PartyConfetti active={showDuckDance || isRevealed} />
+      {/* Party Confetti - Always active for reveal */}
+      <PartyConfetti active={true} />
 
-      {!isRevealed && (
+      {/* Hide all sections before reveal - only show reveal */}
+      {false && (
         <>
           {/* Hero Section with Enhanced Water Theme */}
           <section className="hero-premium min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-8 sm:py-12">

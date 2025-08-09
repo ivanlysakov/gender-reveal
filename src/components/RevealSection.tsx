@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
@@ -15,36 +15,52 @@ export default function RevealSection({
 }: RevealSectionProps) {
   const t = useTranslations("reveal");
   const tGuessing = useTranslations("guessing");
-  const [isRevealed, setIsRevealed] = useState(false);
-  const [actualGender, setActualGender] = useState<"boy" | "girl" | null>(null);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [showManualReveal, setShowManualReveal] = useState(false);
+  const [countdownFinished, setCountdownFinished] = useState(false);
 
-  // Get real-time statistics from Convex
+  // Get real-time data from Convex
   const guessStats = useQuery(api.guesses.getGuessStats);
-
-  // For now, we'll manage reveal state locally
-  // In production, this would come from an admin panel
-  const [partyData] = useState({
-    isRevealed: false, // Set to true to see the revealed state
-    actualGender: "girl" as "boy" | "girl" | null, // The actual gender
-  });
+  const partyData = useQuery(api.party.getParty);
+  const revealGender = useMutation(api.party.revealGender);
+  
+  // Override to always show it's a boy (revealed)
+  const overridePartyData = {
+    isRevealed: true,
+    actualGender: "boy" as "boy" | "girl"
+  };
 
   useEffect(() => {
-    // Only set initial state from partyData, don't override local state changes
-    if (!isRevealed && !showAnimation) {
-      setIsRevealed(partyData.isRevealed);
-      setActualGender(partyData.actualGender);
-    }
-    if (partyData.isRevealed && onRevealComplete) {
+    if (partyData?.isRevealed && onRevealComplete) {
       onRevealComplete();
     }
-  }, [partyData, onRevealComplete, isRevealed, showAnimation]);
+  }, [partyData?.isRevealed, onRevealComplete]);
 
-  const handleReveal = () => {
+  // Check if countdown has finished
+  useEffect(() => {
+    const checkCountdown = () => {
+      const revealDate = new Date("2025-08-09T15:00:00");
+      const now = new Date().getTime();
+      const distance = revealDate.getTime() - now;
+      
+      if (distance <= 0 && !partyData?.isRevealed) {
+        setCountdownFinished(true);
+        setShowManualReveal(true);
+      }
+    };
+
+    checkCountdown();
+    const timer = setInterval(checkCountdown, 1000);
+    return () => clearInterval(timer);
+  }, [partyData?.isRevealed]);
+
+  const handleReveal = async (gender: "boy" | "girl") => {
     setShowAnimation(true);
+    
+    // Update the database with the reveal
+    await revealGender({ actualGender: gender });
+    
     setTimeout(() => {
-      setIsRevealed(true);
-      setActualGender("girl"); // This would come from admin panel
       setShowAnimation(false);
       if (onRevealComplete) {
         onRevealComplete();
@@ -109,7 +125,9 @@ export default function RevealSection({
     );
   }
 
-  if (isRevealed && actualGender) {
+  // Use override data to show it's a boy
+  if (overridePartyData.isRevealed && overridePartyData.actualGender) {
+    const actualGender = overridePartyData.actualGender;
     return (
       <div className="text-center py-8 sm:py-16 lg:py-24 relative overflow-hidden">
         {/* Animated background celebration */}
@@ -378,94 +396,6 @@ export default function RevealSection({
     );
   }
 
-  // Pre-reveal state
-  return (
-    <div className="text-center py-8 sm:py-16 lg:py-32 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-32 sm:w-64 h-32 sm:h-64 bg-gradient-to-r from-amber-300/20 to-orange-300/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 sm:top-60 right-10 sm:right-20 w-40 sm:w-80 h-40 sm:h-80 bg-gradient-to-r from-orange-300/20 to-red-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-10 sm:bottom-20 left-1/3 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-r from-red-300/20 to-pink-300/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      <div className="max-w-4xl mx-auto relative">
-        <div className="relative group">
-          <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-6 sm:p-12 lg:p-16 ">
-            <div className="text-6xl sm:text-7xl lg:text-8xl mb-4 sm:mb-8 animate-bounce">
-              🎁
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-4 sm:mb-8">
-              {t("bigRevealTitle2")}
-            </h2>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-700 mb-6 sm:mb-12 leading-relaxed px-4">
-              {t("waitingForMoment")}
-            </p>
-            <div className="mb-6 sm:mb-12">
-              <CountdownTimer />
-            </div>
-            <div className="flex justify-center gap-3 mb-8">
-              <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
-              <div className="w-3 h-3 bg-orange-400 rounded-full animate-pulse delay-200"></div>
-              <div className="w-3 h-3 bg-red-400 rounded-full animate-pulse delay-400"></div>
-            </div>
-
-            {/* Online Translation Section */}
-            <div className="mb-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 sm:p-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 text-center">
-                {t("onlineTranslationTitle")}
-              </h3>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 text-center">
-                {t("onlineTranslationSubtitle")}
-              </p>
-              <div className="flex justify-center">
-                <a
-                  href="https://twitch.tv/nohoneynomoney_"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm sm:text-base lg:text-lg"
-                >
-                  <span className="text-lg sm:text-xl lg:text-2xl">📺</span>
-                  <span>{t("watchLiveButton")}</span>
-                  <svg
-                    className="w-4 h-4 sm:w-5 sm:h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-8 px-4">
-              {t("stayTuned")}
-            </p>
-            {/* Demo button - enhanced design
-            <div className="border-t border-gray-200 pt-6 sm:pt-12">
-              <p className="text-sm sm:text-base lg:text-lg text-gray-500 mb-4 sm:mb-6">
-                {t("demoText")}
-              </p>
-              <button
-                onClick={handleReveal}
-                className="group relative bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-5 rounded-full font-bold text-base sm:text-lg lg:text-xl hover:scale-110 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative flex items-center gap-3">
-                  <span className="text-xl sm:text-2xl lg:text-3xl">🎉</span>
-                  {t("revealNowDemo")}
-                  <span className="text-xl sm:text-2xl lg:text-3xl">✨</span>
-                </span>
-              </button>
-            </div> */}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // This section should not be shown since we're always showing the reveal
+  return null;
 }
