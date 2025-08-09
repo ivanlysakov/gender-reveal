@@ -260,5 +260,27 @@
       "submitting": "Submitting...",
       "tryAgain": "Make Another Prediction"
     }
+  },
+  "guessesPage": {
+    "title": "All Predictions",
+    "subtitle": "Browse all {count} predictions from our friends and family",
+    "backToHome": "Back to Home",
+    "filterAll": "All",
+    "filterBoy": "Team Boy",
+    "filterGirl": "Team Girl",
+    "searchPlaceholder": "Search by name or message...",
+    "guess": "Prediction",
+    "boy": "Boy",
+    "girl": "Girl",
+    "zodiac": "Zodiac Sign",
+    "suggestedName": "Suggested Name",
+    "message": "Message",
+    "wishes": "Wishes",
+    "noResults": "No predictions found matching your search",
+    "translate": "Translate",
+    "translating": "Translating...",
+    "original": "Original",
+    "showOriginal": "Show Original",
+    "retry": "Retry"
   }
 }

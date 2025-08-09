@@ -24,7 +24,7 @@ export default function CountdownTimer() {
     setMounted(true);
 
     // Set your reveal date here
-    const revealDate = new Date("2025-08-10T15:00:00");
+    const revealDate = new Date("2025-08-09T15:00:00");
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -123,10 +123,7 @@ export default function CountdownTimer() {
       {/* Countdown Numbers */}
       <div className="countdown-timer grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-8">
         {timeUnits.map((unit, index) => (
-          <div
-            key={index}
-            className="relative group"
-          >
+          <div key={index} className="relative group">
             {/* Card with gradient background */}
             <div
               className="countdown-timer-item relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
@@ -137,17 +134,20 @@ export default function CountdownTimer() {
             >
               {/* Subtle pattern overlay */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `radial-gradient(circle at 1px 1px, ${unit.color} 1px, transparent 1px)`,
-                  backgroundSize: "20px 20px",
-                }} />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, ${unit.color} 1px, transparent 1px)`,
+                    backgroundSize: "20px 20px",
+                  }}
+                />
               </div>
-              
+
               {/* Number display with better contrast */}
               <div className="relative text-center">
                 <div
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-1 sm:mb-2 transition-all duration-300 group-hover:scale-110"
-                  style={{ 
+                  style={{
                     color: unit.color,
                     textShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
                     fontFamily: "system-ui, -apple-system, sans-serif",
@@ -157,9 +157,9 @@ export default function CountdownTimer() {
                 >
                   {String(unit.value).padStart(2, "0")}
                 </div>
-                <div 
+                <div
                   className="text-sm md:text-base font-semibold uppercase tracking-wider"
-                  style={{ 
+                  style={{
                     color: unit.color,
                     opacity: 0.8,
                   }}
@@ -167,9 +167,9 @@ export default function CountdownTimer() {
                   {unit.label}
                 </div>
               </div>
-              
+
               {/* Decorative corner accent */}
-              <div 
+              <div
                 className="absolute top-0 right-0 w-16 h-16 opacity-20"
                 style={{
                   background: unit.bg,
@@ -186,7 +186,9 @@ export default function CountdownTimer() {
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-[#2C5282]">
           {t("revealDate")}
         </p>
-        <p className="text-sm sm:text-base md:text-lg text-[#4A9B9B] font-medium px-2">{t("revealSubtitle")}</p>
+        <p className="text-sm sm:text-base md:text-lg text-[#4A9B9B] font-medium px-2">
+          {t("revealSubtitle")}
+        </p>
       </div>
 
       {/* Nature-themed Background Elements */}
